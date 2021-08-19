@@ -1,7 +1,9 @@
 import React from 'react';
 import { Countdown } from './features/countdown/Countdown';
+import { Quizz } from './features/quizz/Quizz';
 
 import './App.css';
+
 
 function App() {
   // Check countdown end duration for redirection.
@@ -11,9 +13,11 @@ function App() {
     }
   }
 
+
+  //<Countdown className="countdown" onTimeChange={handleTimeChange} />
   return (
     <div className="App">
-      <Countdown className="countdown" onTimeChange={handleTimeChange} />
+      <Quizz />
     </div>
   );
 }

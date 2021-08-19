@@ -1,25 +1,23 @@
-{
-    "codes": [
-        {
-            "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date ,parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
-            "zone": {
-                "start": 49,
-                "end": 53
-            }
-        },
-        {
-            "code": "numpy as np\nB = np.ones((3,2))\nprint(B)\nB.shape\nB.sum()",
-            "zone": {
-                "start": 0,
-                "end": 1
-            }
-        },
-        {
-            "code": "def mafonction(a,b,c):\n    resultat = a+b*b+c\n    rturn resultat",
-            "zone": {
-                "start": 50,
-                "end": 55
-            }
-        }
-    ]
-}
+[
+  {
+    "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date ,parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
+    "zone": {
+      "start": 49,
+      "end": 53
+    }
+  },
+  {
+    "code": "numpy as np\nB = np.ones((3,2))\nprint(B)\nB.shape\nB.sum()",
+    "zone": {
+      "start": 0,
+      "end": 1
+    }
+  },
+  {
+    "code": "def mafonction(a,b,c):\n    resultat = a+b*b+c\n    rturn resultat",
+    "zone": {
+      "start": 50,
+      "end": 55
+    }
+  }
+]
