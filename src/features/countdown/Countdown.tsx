@@ -21,7 +21,10 @@ export class Countdown extends React.Component<IProps, {time: number}> {
     this.handleTimeChange = this.handleTimeChange.bind(this);
   }
 
-  // Return the remaining duration of the countdown.
+  /**
+   * Return the remaining duration of the countdown.
+   * @param time the remaining time.
+   */
   handleTimeChange(time: number) {
     this.props.onTimeChange(time);
     if (time < 0) {
@@ -30,7 +33,7 @@ export class Countdown extends React.Component<IProps, {time: number}> {
   }
 
   componentDidMount() {
-    // Generate countdown values
+    // Generate countdown values.
     for (let i = this.maxNum; i > 0; i--) {
       let numberClassName = "num" + i;
       this.numbers.push(
@@ -39,7 +42,7 @@ export class Countdown extends React.Component<IProps, {time: number}> {
     }
     this.numbers.push(<span key="num0" className={styles.num0}>START !</span>);
 
-    // Define animation remaining duration
+    // Define animation remaining duration.
     this.timerID = window.setInterval(() => this.setState(state => { this.handleTimeChange(state.time); return { time: state.time - 1 }}), 1000);
   }
 

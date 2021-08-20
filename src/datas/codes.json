@@ -1,6 +1,6 @@
 [
   {
-    "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date ,parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
+    "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date, parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
     "zone": {
       "start": 49,
       "end": 53

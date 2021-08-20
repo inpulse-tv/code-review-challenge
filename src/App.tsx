@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Countdown } from './features/countdown/Countdown';
 import { Quizz } from './features/quizz/Quizz';
 
@@ -6,18 +6,37 @@ import './App.css';
 
 
 function App() {
-  // Check countdown end duration for redirection.
+  const [runQuizz, setRun] = useState(true);
+  const [showQuizz, setShowQuizz] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+
+  /**
+   * Check countdown end duration for redirection.
+   * @param time Remaining time.
+   */
   const handleTimeChange = (time: number) => {
     if (time < 0){
-      console.log("Redirect !");
+      setRun(false);
+      setShowQuizz(true);
     }
   }
 
+  /**
+   * Check quizz current index for redirection.
+   * @param index Current index.
+   */
+  const handleChangeIndex = (index: number) => {
+    if (index >= 3) {
+      setShowQuizz(false);
+      setShowResult(true);
+    }
+  }
 
-  //<Countdown className="countdown" onTimeChange={handleTimeChange} />
   return (
     <div className="App">
-      <Quizz />
+      {runQuizz ? <Countdown className="countdown" onTimeChange={handleTimeChange} /> : null }
+      {showQuizz ? <Quizz onIndexChange={handleChangeIndex} /> : null }
+      {showResult ? <p>Game Over</p> : null }
     </div>
   );
 }
