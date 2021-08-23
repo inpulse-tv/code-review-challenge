@@ -29,10 +29,17 @@ $max_width: 2150px;
 $min_font: 16px;
 $max_font: 68px;
 
+$ripple_duration: 600;
+$good_answer_color: rgba(18, 236, 84, 0.7);
+$bad_answer_color: rgba(236, 62, 18, 0.7);
+
+:export {
+  rippleDuration: $ripple_duration;
+}
+
 :global(pre.prettyprint) {
   border: none !important;
   @include fluid-type($min_width, $max_width, $min_font, $max_font);
-  // font-size: 3.2vw;
   margin: 1.8vw;
   code {
     white-space: pre-wrap;
@@ -44,14 +51,14 @@ span.ripple {
   position: absolute;
   border-radius: 50%;
   transform: scale(0);
-  animation: ripple 600ms linear;
+  animation: ripple $ripple_duration+ms linear;
 
   &-good {
-    background-color: rgba(18, 236, 84, 0.7);
+    background-color: $good_answer_color;
   }
 
   &-bad {
-    background-color: rgba(236, 62, 18, 0.7);
+    background-color: $bad_answer_color;
   }
 }
 

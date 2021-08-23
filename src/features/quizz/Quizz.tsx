@@ -14,6 +14,7 @@ import { ICode } from "../../datas/ICode";
 export class Quizz extends React.Component<IProps, IState> {
   preElm: React.RefObject<HTMLPreElement> | undefined;
   isClicked: boolean = false;
+  rippleDuration: number = parseInt(styles.rippleDuration);
 
   constructor(props: IProps) {
     super(props);
@@ -26,7 +27,7 @@ export class Quizz extends React.Component<IProps, IState> {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleIndexChange = this.handleIndexChange.bind(this);
-    this.validate = this.validate.bind(this);
+    this.handleValidateClick = this.handleValidateClick.bind(this);
     this.preElm = React.createRef();
   }
 
@@ -60,7 +61,7 @@ export class Quizz extends React.Component<IProps, IState> {
     e.currentTarget.appendChild(circle);
 
     if (callback) {
-      setTimeout(callback, 600);
+      setTimeout(callback, this.rippleDuration);
     }
   }
 
@@ -97,7 +98,7 @@ export class Quizz extends React.Component<IProps, IState> {
   /**
    * Check answer and return result.
    */
-  validate(): void {
+  handleValidateClick(): void {
     this.setState(() => {
       return { isCorrect: true };
     });
@@ -117,15 +118,16 @@ export class Quizz extends React.Component<IProps, IState> {
     const callback = () => {
       this.setState(
         (state, props) => {
+          const newIndex: number = state.index + 1;
           return {
-            index: state.index + 1,
+            index: newIndex,
             code:
-              state.index + 1 < props.maxIndex
-                ? state.unOrderedList[state.index + 1].code
+              newIndex < props.maxIndex
+                ? state.unOrderedList[newIndex].code
                 : "",
             langCode:
-              state.index + 1 < props.maxIndex
-                ? state.unOrderedList[state.index + 1].language
+              newIndex < props.maxIndex
+                ? state.unOrderedList[newIndex].language
                 : "",
           };
         },
@@ -173,7 +175,7 @@ export class Quizz extends React.Component<IProps, IState> {
       currentElm.innerHTML = html;
       currentElm
         .getElementsByClassName("answer")[0]
-        .addEventListener("click", this.validate);
+        .addEventListener("click", this.handleValidateClick);
     }
   }
 
