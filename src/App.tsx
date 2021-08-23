@@ -6,8 +6,8 @@ import './App.css';
 
 
 function App() {
-  const [runQuizz, setRun] = useState(true);
-  const [showQuizz, setShowQuizz] = useState(false);
+  const [runQuizz, setRun] = useState(false);
+  const [showQuizz, setShowQuizz] = useState(true);
   const [showResult, setShowResult] = useState(false);
 
   /**
@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
       {runQuizz ? <Countdown className="countdown" onTimeChange={handleTimeChange} /> : null }
-      {showQuizz ? <Quizz onIndexChange={handleChangeIndex} /> : null }
+      {showQuizz ? <Quizz onIndexChange={handleChangeIndex} maxIndex={3} /> : null }
       {showResult ? <p>Game Over</p> : null }
     </div>
   );

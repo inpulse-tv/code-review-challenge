@@ -1,5 +1,8 @@
+import { ICode } from "../../datas/ICode";
+
 export interface IState {
-    unOrderedList: Array<string>,
-    getFromJson: string | null,
+    unOrderedList: Array<ICode>,
+    getCode: string | null,
+    getLangCode: string | null,
     index: number
 }

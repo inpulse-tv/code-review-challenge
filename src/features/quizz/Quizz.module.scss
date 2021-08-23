@@ -29,7 +29,7 @@ $max_width: 2150px;
 $min_font: 16px;
 $max_font: 68px;
 
-pre.prettyprint {
+:global(pre.prettyprint) {
   border: none !important;
   @include fluid-type($min_width, $max_width, $min_font, $max_font);
   // font-size: 3.2vw;
@@ -37,5 +37,27 @@ pre.prettyprint {
   code {
     white-space: pre-wrap;
     display: inline-block;
+  }
+}
+
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+
+  &-good {
+    background-color: rgba(18, 236, 84, 0.7);
+  }
+
+  &-bad {
+    background-color: rgba(236, 62, 18, 0.7);
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(1);
+    opacity: 0;
   }
 }
