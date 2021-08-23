@@ -1,10 +1,9 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent as ReactMouseEvent } from "react";
 import styles from "./Quizz.module.scss";
 import codes from "../../datas/codes.json";
 import { IProps } from "./IProps";
 import { IState } from "./IState";
 import { ICode } from "../../datas/ICode";
-import { threadId } from "worker_threads";
 
 /**
  * Quizz component.
@@ -20,26 +19,23 @@ export class Quizz extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       unOrderedList: [],
-      getCode: null,
-      getLangCode: null,
+      code: null,
+      langCode: null,
       index: 0,
+      isCorrect: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleIndexChange = this.handleIndexChange.bind(this);
+    this.validate = this.validate.bind(this);
     this.preElm = React.createRef();
   }
 
   /**
    * Display a circle on the screen when click.
    * @param e Mouse event.
-   * @param isGoodAnswer Indicate if answer is correct.
    * @param callback Callback function. Execute after ripple animation.
    */
-  addRippleClick(
-    e: MouseEvent,
-    isGoodAnswer: boolean,
-    callback?: () => {} | void
-  ): void {
+  addRippleClick(e: ReactMouseEvent, callback?: () => {} | void): void {
     const circle = document.createElement("span");
     const diameter = Math.max(400, 400);
     const radius = diameter / 2;
@@ -51,7 +47,7 @@ export class Quizz extends React.Component<IProps, IState> {
     let classNames: string[] = [];
     classNames.push(styles.ripple);
     classNames.push(
-      isGoodAnswer ? styles["ripple-good"] : styles["ripple-bad"]
+      this.state.isCorrect ? styles["ripple-good"] : styles["ripple-bad"]
     );
     circle.classList.add(...classNames);
 
@@ -100,22 +96,18 @@ export class Quizz extends React.Component<IProps, IState> {
 
   /**
    * Check answer and return result.
-   * @param e MouseEvent click.
    */
-  validate(e: MouseEvent): boolean {
-    /*
-    const x = e.clientX, y = e.clientY;
-    alert(document.elementFromPoint(x, y)?.innerHTML);
-    */
-    console.log(e.currentTarget);
-    return true;
+  validate(): void {
+    this.setState(() => {
+      return { isCorrect: true };
+    });
   }
 
   /**
    * Apply result and select next code.
    * @param e MouseEvent click.
    */
-  handleClick(e: MouseEvent): void {
+  handleClick(e: ReactMouseEvent): void {
     e.preventDefault();
 
     // Prevent multiple clicks.
@@ -124,29 +116,65 @@ export class Quizz extends React.Component<IProps, IState> {
 
     const callback = () => {
       this.setState(
-        (state) => {
+        (state, props) => {
           return {
             index: state.index + 1,
-            getCode:
-              this.state.index + 1 < this.props.maxIndex
-                ? this.state.unOrderedList[this.state.index + 1].code
+            code:
+              state.index + 1 < props.maxIndex
+                ? state.unOrderedList[state.index + 1].code
                 : "",
-            getLangCode:
-              this.state.index + 1 < this.props.maxIndex
-                ? this.state.unOrderedList[this.state.index + 1].language
+            langCode:
+              state.index + 1 < props.maxIndex
+                ? state.unOrderedList[state.index + 1].language
                 : "",
           };
         },
         () => {
           this.handleIndexChange();
-          this.applyPrettify();
+          if (this.state.index < this.props.maxIndex) {
+            this.applyAnswer();
+            this.applyPrettify();
+          }
           this.isClicked = false;
         }
       );
     };
 
-    const isGoodAnswer: boolean = this.validate(e);
-    this.addRippleClick(e, isGoodAnswer, callback);
+    this.addRippleClick(e, callback);
+  }
+
+  /**
+   * Apply click event to wrong code element.
+   */
+  applyAnswer(): void {
+    if (this.preElm?.current) {
+      // Reinit answer status.
+      this.setState(() => {
+        return { isCorrect: false };
+      });
+
+      const currentElm: HTMLElement =
+        this.preElm.current.getElementsByTagName("code")[0];
+      let html: string = currentElm.innerHTML;
+      const startIndex: number =
+        this.state.unOrderedList[this.state.index].range.start;
+      const indexLength: number =
+        this.state.unOrderedList[this.state.index].range.length;
+
+      // Add event click to wrong code.
+      const wrongText: string = html.substring(
+        startIndex,
+        startIndex + indexLength
+      );
+      html =
+        html.substring(0, startIndex) +
+        `<span class="answer">${wrongText}</span>` +
+        html.substring(startIndex + indexLength);
+      currentElm.innerHTML = html;
+      currentElm
+        .getElementsByClassName("answer")[0]
+        .addEventListener("click", this.validate);
+    }
   }
 
   /**
@@ -159,19 +187,25 @@ export class Quizz extends React.Component<IProps, IState> {
   componentDidMount(): void {
     // Get Quizz.
     const unOrderedList: Array<ICode> = this.getUnOrderedCodes();
-    this.setState(() => {
-      return {
-        unOrderedList: unOrderedList,
-        getCode: unOrderedList[this.state.index].code,
-        getLangCode: unOrderedList[this.state.index].language,
-      };
-    }, this.applyPrettify);
+    this.setState(
+      () => {
+        return {
+          unOrderedList: unOrderedList,
+          code: unOrderedList[this.state.index].code,
+          langCode: unOrderedList[this.state.index].language,
+        };
+      },
+      () => {
+        this.applyAnswer();
+        this.applyPrettify();
+      }
+    );
   }
 
   render() {
     return (
-      <pre ref={this.preElm} className={`prettyprint ${this.state.getLangCode}`}>
-        <code onClick={this.handleClick}>{this.state.getCode}</code>
+      <pre ref={this.preElm} className={`prettyprint ${this.state.langCode}`}>
+        <code onClick={this.handleClick}>{this.state.code}</code>
       </pre>
     );
   }

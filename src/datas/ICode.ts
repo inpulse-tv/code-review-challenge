@@ -3,6 +3,6 @@ export interface ICode {
     language: string,
     range: {
         start: number,
-        end: number
+        length: number
     }
 }

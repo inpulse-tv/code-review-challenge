@@ -4,7 +4,6 @@ import { Quizz } from './features/quizz/Quizz';
 
 import './App.css';
 
-
 function App() {
   const [runQuizz, setRun] = useState(false);
   const [showQuizz, setShowQuizz] = useState(true);

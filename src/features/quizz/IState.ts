@@ -2,7 +2,8 @@ import { ICode } from "../../datas/ICode";
 
 export interface IState {
     unOrderedList: Array<ICode>,
-    getCode: string | null,
-    getLangCode: string | null,
-    index: number
+    code: string | null,
+    langCode: string | null,
+    index: number,
+    isCorrect: boolean
 }
