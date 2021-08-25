@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Countdown.module.scss";
+import styles from "./StartCountdown.module.scss";
 import { IProps } from "./IProps";
 
 /**
@@ -8,7 +8,7 @@ import { IProps } from "./IProps";
  *
  * @returns the countdown
  */
-export class Countdown extends React.Component<IProps, {time: number}> {
+export class StartCountdown extends React.Component<IProps, {time: number}> {
   maxNum = parseInt(styles.maxNumber);
   numbers: React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>[] = [];
   timerID: number | undefined;

@@ -7,7 +7,7 @@ import { ICode } from "../../datas/ICode";
 
 /**
  * Quizz component.
- * Return the 10 first codes randomly get from the json codes datasource.
+ * Return the n first codes randomly get from the json codes datasource.
  * Access to the next code after a click on the component.
  * If the click is on the validate zone, a point is attribute.
  */
@@ -22,12 +22,13 @@ export class Quizz extends React.Component<IProps, IState> {
       unOrderedList: [],
       code: null,
       langCode: null,
-      index: 0,
+      index: props.startIndex ?? 0,
       isCorrect: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleIndexChange = this.handleIndexChange.bind(this);
     this.handleValidateClick = this.handleValidateClick.bind(this);
+    this.nextQuizz = this.nextQuizz.bind(this);
     this.preElm = React.createRef();
   }
 
@@ -110,39 +111,38 @@ export class Quizz extends React.Component<IProps, IState> {
    */
   handleClick(e: ReactMouseEvent): void {
     e.preventDefault();
-
     // Prevent multiple clicks.
     if (this.isClicked) return;
     this.isClicked = true;
+    this.addRippleClick(e, this.nextQuizz);
+  }
 
-    const callback = () => {
-      this.setState(
-        (state, props) => {
-          const newIndex: number = state.index + 1;
-          return {
-            index: newIndex,
-            code:
-              newIndex < props.maxIndex
-                ? state.unOrderedList[newIndex].code
-                : "",
-            langCode:
-              newIndex < props.maxIndex
-                ? state.unOrderedList[newIndex].language
-                : "",
-          };
-        },
-        () => {
-          this.handleIndexChange();
-          if (this.state.index < this.props.maxIndex) {
-            this.applyAnswer();
-            this.applyPrettify();
-          }
-          this.isClicked = false;
+  /**
+   * Select next code on the list.
+   */
+  nextQuizz(): void {
+    this.setState(
+      (state, props) => {
+        const newIndex: number = state.index + 1;
+        return {
+          index: newIndex,
+          code:
+            newIndex < props.maxIndex ? state.unOrderedList[newIndex].code : "",
+          langCode:
+            newIndex < props.maxIndex
+              ? state.unOrderedList[newIndex].language
+              : "",
+        };
+      },
+      () => {
+        this.handleIndexChange();
+        if (this.state.index < this.props.maxIndex) {
+          this.applyAnswer();
+          this.applyPrettify();
         }
-      );
-    };
-
-    this.addRippleClick(e, callback);
+        this.isClicked = false;
+      }
+    );
   }
 
   /**
@@ -202,6 +202,17 @@ export class Quizz extends React.Component<IProps, IState> {
         this.applyPrettify();
       }
     );
+  }
+
+  componentDidUpdate(prevProps: IProps, prevState: IState): void {
+    // Change quizz if countdown duration set 0 and ask for new index.
+    if (
+      this.props.changeIndex !== undefined &&
+      prevProps.changeIndex !== this.props.changeIndex &&
+      this.props.changeIndex
+    ) {
+      this.nextQuizz();
+    }
   }
 
   render() {
