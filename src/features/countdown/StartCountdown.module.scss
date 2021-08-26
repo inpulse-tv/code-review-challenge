@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,900");
 $max-number: 3;
 $anim: $max-number * 2s;
 $red: #FF1643;
@@ -10,9 +9,8 @@ $gray: #778F9B;
 }
 
 .number {
-  font-family: 'Roboto', sans-serif;
-  font-size: 9em;
   color: $gray;
+  font-size: 9em;
 
   span {
     position: absolute;

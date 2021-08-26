@@ -1,7 +1,9 @@
+import { ITimeDiff } from "../../utils/timeDiff";
+
 export interface IProps {
-    className?: string;
-    maxIndex: number;
-    startIndex?: number;
-    changeIndex?: boolean;
-    onIndexChange: (index:number) => {} | void;
-  }
+  className?: string;
+  maxIndex: number;
+  startIndex?: number;
+  changeIndex?: boolean;
+  onIndexChange: (values: [number, boolean, ITimeDiff]) => {} | void;
+}

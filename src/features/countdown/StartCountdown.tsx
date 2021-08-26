@@ -40,7 +40,7 @@ export class StartCountdown extends React.Component<IProps, {time: number}> {
         <span key={"num" + i} className={styles[numberClassName]}>{i}</span>
       );
     }
-    this.numbers.push(<span key="num0" className={styles.num0}>START !</span>);
+    this.numbers.push(<span key="num0" className={styles.num0}>{this.props.endText}</span>);
 
     // Define animation remaining duration.
     this.timerID = window.setInterval(() => this.setState(state => { this.handleTimeChange(state.time); return { time: state.time - 1 }}), 1000);

@@ -4,6 +4,7 @@ import codes from "../../datas/codes.json";
 import { IProps } from "./IProps";
 import { IState } from "./IState";
 import { ICode } from "../../datas/ICode";
+import { getTimeDiff, ITimeDiff } from "../../utils/timeDiff";
 
 /**
  * Quizz component.
@@ -24,6 +25,7 @@ export class Quizz extends React.Component<IProps, IState> {
       langCode: null,
       index: props.startIndex ?? 0,
       isCorrect: false,
+      startDate: new Date()
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleIndexChange = this.handleIndexChange.bind(this);
@@ -114,6 +116,7 @@ export class Quizz extends React.Component<IProps, IState> {
     // Prevent multiple clicks.
     if (this.isClicked) return;
     this.isClicked = true;
+    // Add and render Ripple from answer.
     this.addRippleClick(e, this.nextQuizz);
   }
 
@@ -183,7 +186,8 @@ export class Quizz extends React.Component<IProps, IState> {
    * Return the quizz current index.
    */
   handleIndexChange(): void {
-    this.props.onIndexChange(this.state.index);
+    const finalDate:ITimeDiff = getTimeDiff(this.state.startDate, new Date());
+    this.props.onIndexChange([this.state.index, this.state.isCorrect, finalDate]);
   }
 
   componentDidMount(): void {
@@ -194,7 +198,7 @@ export class Quizz extends React.Component<IProps, IState> {
         return {
           unOrderedList: unOrderedList,
           code: unOrderedList[this.state.index].code,
-          langCode: unOrderedList[this.state.index].language,
+          langCode: unOrderedList[this.state.index].language
         };
       },
       () => {
@@ -205,7 +209,7 @@ export class Quizz extends React.Component<IProps, IState> {
   }
 
   componentDidUpdate(prevProps: IProps, prevState: IState): void {
-    // Change quizz if countdown duration set 0 and ask for new index.
+    // Change Quizz if countdown duration set 0 and ask for new index.
     if (
       this.props.changeIndex !== undefined &&
       prevProps.changeIndex !== this.props.changeIndex &&

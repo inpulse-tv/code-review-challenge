@@ -3,4 +3,5 @@ export interface IProps {
   onTimeChange: (time: number) => {} | void;
   timerStart?: number;
   autoReload?: boolean;
+  endText: string;
 }
