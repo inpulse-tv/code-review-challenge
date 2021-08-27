@@ -11,8 +11,6 @@ $bad_answer_color: rgba(236, 62, 18, 0.7);
 
 :global(pre.prettyprint) {
   border: none !important;
-  @include fluid-type($min_width, $max_width, $min_font, $max_font);
-  margin: 1.8vw;
   code {
     white-space: pre-wrap;
     display: inline-block;

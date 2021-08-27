@@ -6,6 +6,7 @@ export interface ITimeDiff {
   minutes: number;
   seconds: number;
   milliseconds: number;
+  total: number;
 }
 
 /**
@@ -17,6 +18,7 @@ export interface ITimeDiff {
 export const getTimeDiff = (startDate: Date, endDate: Date): ITimeDiff => {
   const initialYear = startDate.getFullYear();
   const finalYear = endDate.getFullYear();
+  const total = endDate.getTime() - startDate.getTime();
 
   let yearDiff = finalYear - initialYear;
   let monthDiff = endDate.getMonth() - startDate.getMonth();
@@ -82,6 +84,7 @@ export const getTimeDiff = (startDate: Date, endDate: Date): ITimeDiff => {
     minutes: minutesDiff,
     seconds: secondsDiff,
     milliseconds: millisecondsDiff,
+    total: total
   };
 };
 

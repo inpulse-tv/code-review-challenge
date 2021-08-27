@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,900");
 
-@import './styles/mixins.scss';
-@import './styles/variables.scss';
+@import "./styles/mixins.scss";
+@import "./styles/variables.scss";
 
 .App {
-  font-family: 'Roboto', sans-serif;
+  @include fluid-type($min_width, $max_width, $min_font, $max_font);
+  font-family: "Roboto", sans-serif;
   color: white;
+  margin: 1.8vw;
 }
 
 .start-countdown {
@@ -21,8 +23,20 @@
   right: 10px;
 }
 
+.leaderboard {
+  animation: fadein 2s
+}
+
+@keyframes fadein {
+  from {
+      opacity:0;
+      transform: translateY(1em);
+  }
+  to {
+      opacity:1;
+  }
+}
+
 .results {
-  @include fluid-type($min_width, $max_width, $min_font, $max_font);
-  margin: 1.8vw;
   text-align: center;
 }

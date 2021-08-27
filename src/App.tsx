@@ -5,9 +5,12 @@ import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
 
 import "./App.scss";
 import { ITimeDiff } from "./utils/timeDiff";
+import { Leaderboard } from "./features/leaderboard/leaderboard";
+import lbDatas from "./datas/leaderboard.json";
 
 function App() {
-  const [runQuizz, setRun] = useState(true);
+  const [showLeaderboard, setShowLeaderboard] = useState(true);
+  const [showStartCountdown, setShowStartCountdown] = useState(false);
   const [showQuizz, setShowQuizz] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [changeIndex, setChangeIndex] = useState(false);
@@ -24,7 +27,7 @@ function App() {
    */
   const handleCountdownTimeChange = (time: number) => {
     if (time < 0) {
-      setRun(false);
+      setShowStartCountdown(false);
       setShowQuizz(true);
     }
   };
@@ -83,14 +86,25 @@ function App() {
 
   return (
     <div className="App">
-      {runQuizz ? (
+      {showLeaderboard && (
+        <Leaderboard
+          className="leaderboard"
+          datas={lbDatas}
+          excludeKeys={["email", "millisecs"]}
+          orderBy={[
+            { key: "score", isReverse: true },
+            { key: "time", isReverse: false }
+          ]}
+        />
+      )}
+      {showStartCountdown && (
         <StartCountdown
           className="start-countdown"
           onTimeChange={handleCountdownTimeChange}
           endText="START !"
         />
-      ) : null}
-      {showQuizz ? (
+      )}
+      {showQuizz && (
         <div>
           <Countdown
             date={Date.now() + 59000}
@@ -106,8 +120,8 @@ function App() {
             changeIndex={changeIndex}
           />
         </div>
-      ) : null}
-      {showResult ? (
+      )}
+      {showResult && (
         <div className="results">
           <h1>Votre résultat</h1>
           <p>
@@ -115,9 +129,10 @@ function App() {
             {points === 1 ? null : "s"} sur <b>{maxIndex}</b>
           </p>
           <p>
-            Temps réaslisé :{" "}
+            Temps réalisé :{" "}
             <i>
-              {zeroPad(time.minutes)}:{zeroPad(time.seconds)}.{zeroPad(time.milliseconds, 3)}
+              {zeroPad(time.minutes)}:{zeroPad(time.seconds)}.
+              {zeroPad(time.milliseconds, 3)}
             </i>
           </p>
           {points === maxIndex && (
@@ -126,7 +141,7 @@ function App() {
             </p>
           )}
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
