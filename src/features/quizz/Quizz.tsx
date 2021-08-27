@@ -1,6 +1,5 @@
 import React, { MouseEvent as ReactMouseEvent } from "react";
 import styles from "./Quizz.module.scss";
-import codes from "../../datas/codes.json";
 import { IProps } from "./IProps";
 import { IState } from "./IState";
 import { ICode } from "../../datas/ICode";
@@ -85,7 +84,7 @@ export class Quizz extends React.Component<IProps, IState> {
    * @returns an unordered list of codes.
    */
   getUnOrderedCodes(): ICode[] {
-    let list: ICode[] = codes.map((code) => code);
+    let list: ICode[] = this.props.datas.map((code) => code);
 
     // Unorder codes list
     for (var i = 0; i < list.length - 1; i++) {

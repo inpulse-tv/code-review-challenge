@@ -1,7 +1,14 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,900");
-
 @import "./styles/mixins.scss";
 @import "./styles/variables.scss";
+
+$text-shadow: 0.06rem 0 0.06rem #000, -0.125rem 0 0.06rem #69c5fa;
+$text-shadow-anim-from: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
+$text-shadow-anim-to: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
+
+h1 {
+  font-style: italic;
+  color: #ffd900;
+}
 
 .App {
   @include fluid-type($min_width, $max_width, $min_font, $max_font);
@@ -11,6 +18,8 @@
 }
 
 .start-countdown {
+  font-family: "Nintendoid1";
+  text-shadow: $text-shadow;
   margin: 0;
   position: relative;
   width: 100%;
@@ -24,7 +33,32 @@
 }
 
 .leaderboard {
-  animation: fadein 2s
+  animation: fadein 2s;
+  text-align: center;
+}
+
+.leaderboard-table {
+  font-family: "Nintendoid1";
+  text-shadow:$text-shadow;
+  font-size: 0.8em;
+
+   & th {
+     padding: 1.2vw;
+   }
+}
+
+.start-text {
+  font-family: "Nintendoid1";
+  padding: 1.2vw;
+  font-size: 0.5em;
+  animation-duration: 0.01s;
+  animation-name: textflicker;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.results {
+  text-align: center;
 }
 
 @keyframes fadein {
@@ -37,6 +71,11 @@
   }
 }
 
-.results {
-  text-align: center;
+@keyframes textflicker {
+  from {
+    text-shadow: $text-shadow-anim-from;
+  }
+  to {
+    text-shadow: $text-shadow-anim-to;
+  }
 }

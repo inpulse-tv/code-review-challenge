@@ -6,6 +6,7 @@ import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
 import "./App.scss";
 import { ITimeDiff } from "./utils/timeDiff";
 import { Leaderboard } from "./features/leaderboard/leaderboard";
+import codes from "./datas/codes.json";
 import lbDatas from "./datas/leaderboard.json";
 
 function App() {
@@ -20,6 +21,14 @@ function App() {
   const countdownRef = useRef({} as Countdown);
 
   const maxIndex: number = 3;
+
+  /**
+   * Handle click event on leaderboard.
+   */
+  const handleLeaderboardClick = () => {
+    setShowLeaderboard(false);
+    setShowStartCountdown(true);
+  };
 
   /**
    * Check Start Countdown end duration for redirection.
@@ -52,7 +61,7 @@ function App() {
       ? countdownRef.current.api?.start()
       : countdownRef.current.api?.stop();
 
-    if (index >= 3) {
+    if (index >= maxIndex) {
       setShowQuizz(false);
       setShowResult(true);
     }
@@ -87,15 +96,19 @@ function App() {
   return (
     <div className="App">
       {showLeaderboard && (
-        <Leaderboard
-          className="leaderboard"
-          datas={lbDatas}
-          excludeKeys={["email", "millisecs"]}
-          orderBy={[
-            { key: "score", isReverse: true },
-            { key: "time", isReverse: false }
-          ]}
-        />
+        <div onClick={handleLeaderboardClick} className="leaderboard">
+          <Title />
+          <Leaderboard
+            className="leaderboard-table"
+            datas={lbDatas}
+            excludeKeys={["email", "millisecs"]}
+            orderBy={[
+              { key: "score", isReverse: true },
+              { key: "time", isReverse: false },
+            ]}
+          />
+          <p className="start-text">Appuyez sur l'ecran pour demarrer le jeu</p>
+        </div>
       )}
       {showStartCountdown && (
         <StartCountdown
@@ -114,6 +127,7 @@ function App() {
             ref={countdownRef}
           />
           <Quizz
+            datas={codes}
             onIndexChange={handleIndexChange}
             maxIndex={maxIndex}
             startIndex={0}
@@ -145,5 +159,9 @@ function App() {
     </div>
   );
 }
+
+const Title = (): JSX.Element => {
+  return <h1>Code Review Challenge</h1>;
+};
 
 export default App;

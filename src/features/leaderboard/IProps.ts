@@ -5,4 +5,5 @@ export interface IProps {
   datas: ILeaderboard[];
   excludeKeys?: string[];
   orderBy?: { key: string; isReverse: boolean }[];
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }

@@ -74,11 +74,11 @@ export class Leaderboard extends React.Component<IProps> {
   getRowsData = (): JSX.Element[] => {
     let items = this.props.datas;
     if (this.props.orderBy) {
-      let fieldOrders: { (a: ILeaderboard, b: ILeaderboard): number }[] = [];
+      let fieldsOrder: { (a: ILeaderboard, b: ILeaderboard): number }[] = [];
       this.props.orderBy.forEach((order) => {
-        fieldOrders.push((a, b) => this.compare(a[order.key], b[order.key], order.isReverse));
+        fieldsOrder.push((a, b) => this.compare(a[order.key], b[order.key], order.isReverse));
       });
-      items = items.sort(this.sortBy(...fieldOrders));
+      items = items.sort(this.sortBy(...fieldsOrder));
     }
     const keys = this.getKeys();
     return items.map((row, index) => {
@@ -92,7 +92,7 @@ export class Leaderboard extends React.Component<IProps> {
 
   render() {
     return (
-      <div className={this.props.className}>
+      <div className={this.props.className} onClick={this.props.onClick}>
         <table>
           <thead>
             <tr>{this.getHeader()}</tr>
