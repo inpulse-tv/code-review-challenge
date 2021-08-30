@@ -8,6 +8,7 @@ $text-shadow-anim-to: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
 h1 {
   font-style: italic;
   color: #ffd900;
+  margin-bottom: 1.2vw;
 }
 
 .App {
@@ -35,16 +36,18 @@ h1 {
 .leaderboard {
   animation: fadein 2s;
   text-align: center;
-}
 
-.leaderboard-table {
-  font-family: "Nintendoid1";
-  text-shadow:$text-shadow;
-  font-size: 0.8em;
+  &-table {
+    font-family: "Nintendoid1";
+    text-shadow: $text-shadow;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
 
-   & th {
-     padding: 1.2vw;
-   }
+    & th {
+      padding: 1.2vw;
+    }
+  }
 }
 
 .start-text {
@@ -63,11 +66,11 @@ h1 {
 
 @keyframes fadein {
   from {
-      opacity:0;
-      transform: translateY(1em);
+    opacity: 0;
+    transform: translateY(1em);
   }
   to {
-      opacity:1;
+    opacity: 1;
   }
 }
 

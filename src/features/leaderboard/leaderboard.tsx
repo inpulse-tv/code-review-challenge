@@ -69,6 +69,7 @@ export class Leaderboard extends React.Component<IProps> {
 
   /**
    * Generate table rows from data file.
+   * Order rows, display a limited number of rows.
    * @returns an array of row elements.
    */
   getRowsData = (): JSX.Element[] => {
@@ -81,7 +82,8 @@ export class Leaderboard extends React.Component<IProps> {
       items = items.sort(this.sortBy(...fieldsOrder));
     }
     const keys = this.getKeys();
-    return items.map((row, index) => {
+    const maxRow: number = this.props.maxDisplayRow ?? 3;
+    return items.slice(0, maxRow).map((row, index) => {
       return (
         <tr key={index}>
           <RenderRow key={index} data={row} keys={keys} />

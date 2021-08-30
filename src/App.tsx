@@ -6,7 +6,7 @@ import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
 import "./App.scss";
 import { ITimeDiff } from "./utils/timeDiff";
 import { Leaderboard } from "./features/leaderboard/leaderboard";
-import codes from "./datas/codes.json";
+import quizzDatas from "./datas/codes.json";
 import lbDatas from "./datas/leaderboard.json";
 
 function App() {
@@ -102,6 +102,7 @@ function App() {
             className="leaderboard-table"
             datas={lbDatas}
             excludeKeys={["email", "millisecs"]}
+            maxDisplayRow={5}
             orderBy={[
               { key: "score", isReverse: true },
               { key: "time", isReverse: false },
@@ -127,7 +128,7 @@ function App() {
             ref={countdownRef}
           />
           <Quizz
-            datas={codes}
+            datas={quizzDatas}
             onIndexChange={handleIndexChange}
             maxIndex={maxIndex}
             startIndex={0}
@@ -161,7 +162,7 @@ function App() {
 }
 
 const Title = (): JSX.Element => {
-  return <h1>Code Review Challenge</h1>;
+  return <h1>inpulse Code Review Challenge</h1>;
 };
 
 export default App;

@@ -6,4 +6,5 @@ export interface IProps {
   excludeKeys?: string[];
   orderBy?: { key: string; isReverse: boolean }[];
   onClick?: React.MouseEventHandler<HTMLElement>;
+  maxDisplayRow?: number;
 }
