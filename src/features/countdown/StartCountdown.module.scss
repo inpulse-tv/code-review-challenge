@@ -1,7 +1,7 @@
 $max-number: 3;
 $anim: $max-number * 2s;
-$red: #FF1643;
-$gray: #778F9B;
+$last-value-color: #FF1643;
+$number-color: #fff;
 
 :export {
   maxNumber: $max-number;
@@ -9,7 +9,7 @@ $gray: #778F9B;
 }
 
 .number {
-  color: $gray;
+  color: $number-color;
   font-size: 3em;
 
   span {
@@ -38,7 +38,7 @@ $gray: #778F9B;
 }
 
 .num0 {
-  color: $red;
+  color: $last-value-color;
 }
 
 @for $i from 0 through $max-number {

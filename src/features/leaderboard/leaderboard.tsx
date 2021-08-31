@@ -12,7 +12,7 @@ export class Leaderboard extends React.Component<IProps> {
 
   /**
    * Return the keys from data.
-   * @returns an array of keys
+   * @returns an array of keys.
    */
   getKeys = (): string[] => {
     return Object.keys(this.props.datas[0]).filter(
@@ -33,8 +33,8 @@ export class Leaderboard extends React.Component<IProps> {
 
   /**
    * Sort table rows from multiple fields.
-   * @param args
-   * @returns
+   * @param args list of comparator functions.
+   * @returns the comparator result.
    */
   sortBy = <T extends ILeaderboard>(...args: { (a: T, b: T): number }[]) => {
     const callbacks = args;
@@ -74,6 +74,7 @@ export class Leaderboard extends React.Component<IProps> {
    */
   getRowsData = (): JSX.Element[] => {
     let items = this.props.datas;
+    // Order rows.
     if (this.props.orderBy) {
       let fieldsOrder: { (a: ILeaderboard, b: ILeaderboard): number }[] = [];
       this.props.orderBy.forEach((order) => {
@@ -83,6 +84,7 @@ export class Leaderboard extends React.Component<IProps> {
     }
     const keys = this.getKeys();
     const maxRow: number = this.props.maxDisplayRow ?? 3;
+    // Limit number of rows to show.
     return items.slice(0, maxRow).map((row, index) => {
       return (
         <tr key={index}>
@@ -112,6 +114,9 @@ interface IRow {
   keys: string[];
 }
 
+/**
+ * Render row component.
+ */
 const RenderRow = (props: IRow): JSX.Element => {
   return (
     <>

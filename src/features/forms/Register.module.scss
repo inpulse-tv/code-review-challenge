@@ -1,0 +1,215 @@
+$form-bg: #15172b;
+$text-color: #eee;
+
+$input-bg: #303245;
+$input-color: #eee;
+$input-label-bg-color: #15172b;
+$input-label-color: #808097;
+$input-label-color-active: #dc2f55;
+$input-placeholder-color: #65657b;
+
+$primary-color: #08d;
+$primary-color-active: #06d;
+$disable-color: #b9b8c3;
+
+$checkbox-border-color: $disable-color;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  text-align: center;
+}
+
+.register {
+  background-color: $form-bg;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 80vh;
+}
+
+.input-container {
+  height: 65px;
+  position: relative;
+  width: 100%;
+  margin: 30px 0;
+}
+
+.input {
+  background-color: $input-bg;
+  border-radius: 10px;
+  border: 0;
+  box-sizing: border-box;
+  color: $input-color;
+  font-size: 24px;
+  height: 100%;
+  outline: 0;
+  padding: 0.2em 1em 0;
+  width: 100%;
+}
+
+.cut {
+  background-color: $input-label-bg-color;
+  border-radius: 0.2em;
+  opacity: 0;
+  height: 40px;
+  left: 20px;
+  position: absolute;
+  top: -24px;
+  transition: transform 200ms;
+  width: 90%;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  opacity: 1;
+}
+
+.placeholder {
+  color: $input-placeholder-color;
+  font-family: sans-serif;
+  font-size: 24px;
+  white-space: nowrap;
+  pointer-events: none;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  line-height: 38px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  transform: translateY(-38px) translateX(18px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: $input-label-color;
+}
+
+.input:focus ~ .placeholder {
+  color: $input-label-color-active;
+}
+
+.submit {
+  background-color: $primary-color;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: $text-color;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin: 20px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.submit:active {
+  background-color: $primary-color-active;
+}
+
+.checkbox-container {
+  text-align: left;
+  margin: 12px 0;
+}
+
+label[for="cgu"] {
+  display: flex;
+  flex-direction: row;
+  user-select: none;
+  cursor: pointer;
+  font-size: 0.3em;
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+
+    &:first-child {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      transform: scale(1);
+      vertical-align: middle;
+      border: 1px solid $checkbox-border-color;
+      transition: all 0.2s ease;
+
+      svg {
+        position: absolute;
+        z-index: 1;
+        top: 8px;
+        left: 6px;
+        fill: none;
+        stroke: $text-color;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 16px;
+        stroke-dashoffset: 16px;
+        transition: all 0.3s ease;
+        transition-delay: 0.1s;
+        transform: translate3d(0, 0, 0);
+      }
+
+      &:before {
+        content: "";
+        width: 24px;
+        height: 24px;
+        background: $primary-color;
+        display: block;
+        transform: scale(0);
+        opacity: 1;
+        border-radius: 50%;
+        transition-delay: 0.2s;
+      }
+    }
+
+    &:last-child {
+      margin-left: 8px;
+    }
+  }
+
+  &:hover span:first-child {
+    border-color: $primary-color;
+  }
+}
+
+input[type="checkbox"] {
+  display: none;
+
+  &:checked + .checkbox {
+    span {
+      &:first-child {
+        border-color: $primary-color;
+        background: $primary-color;
+        animation: check 0.6s ease;
+
+        svg {
+          stroke-dashoffset: 0;
+        }
+
+        &:before {
+          transform: scale(2.2);
+          opacity: 0;
+          transition: all 0.6s ease;
+        }
+      }
+
+      &:last-child {
+        color: $disable-color;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}
+
+@keyframes check {
+  50% {
+    transform: scale(1.2);
+  }
+}

@@ -8,9 +8,11 @@ import { ITimeDiff } from "./utils/timeDiff";
 import { Leaderboard } from "./features/leaderboard/leaderboard";
 import quizzDatas from "./datas/codes.json";
 import lbDatas from "./datas/leaderboard.json";
+import RegisterFormular from "./features/forms/Register";
 
 function App() {
   const [showLeaderboard, setShowLeaderboard] = useState(true);
+  const [showRegistration, setShowRegistration] = useState(false);
   const [showStartCountdown, setShowStartCountdown] = useState(false);
   const [showQuizz, setShowQuizz] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -27,6 +29,14 @@ function App() {
    */
   const handleLeaderboardClick = () => {
     setShowLeaderboard(false);
+    setShowRegistration(true);
+  };
+
+  /**
+   * Handle registration submit event.
+   */
+  const handleRegistrationSubmit = () => {
+    setShowRegistration(false);
     setShowStartCountdown(true);
   };
 
@@ -110,6 +120,9 @@ function App() {
           />
           <p className="start-text">Appuyez sur l'ecran pour demarrer le jeu</p>
         </div>
+      )}
+      {showRegistration && (
+        <RegisterFormular />
       )}
       {showStartCountdown && (
         <StartCountdown
