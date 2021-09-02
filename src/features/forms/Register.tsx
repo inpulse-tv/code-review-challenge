@@ -73,7 +73,7 @@ const RegisterFormular = (props: IProps) => {
                 </span>
                 <span>
                   En cliquant sur "Démarrer le jeu" vous autorisez Ingeniance et
-                  inpulse.tv à utliser votre image sur leur chaîne youtube.
+                  inpulse.tv à utiliser votre image sur leur chaîne youtube.
                 </span>
               </label>
               <ErrorMessage name="cgu" component="div" className={styles["invalid-feedback"]} />

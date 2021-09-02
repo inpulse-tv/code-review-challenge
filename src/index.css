@@ -58,7 +58,7 @@ body {
   display: grid;
   height: 100vh;
   place-items: center;
-  font-smooth: auto;
   background-color: #002451;
+  overflow: hidden;
 }
 

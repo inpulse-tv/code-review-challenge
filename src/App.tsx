@@ -105,6 +105,16 @@ function App() {
     countdownRef.current?.api?.start();
   };
 
+  /**
+   * Handle click on user result display.
+   */
+  const handleEndClick = (): void => {
+    setShowResult(false);
+    // Reset score.
+    setPoints(0);
+    setShowLeaderboard(true);
+  };
+
   return (
     <div className="App">
       {showLeaderboard && (
@@ -124,7 +134,7 @@ function App() {
         </div>
       )}
       {showRegistration && (
-        <RegisterFormular onSubmit={handleRegistrationSubmit}/>
+        <RegisterFormular onSubmit={handleRegistrationSubmit} />
       )}
       {showStartCountdown && (
         <StartCountdown
@@ -152,14 +162,14 @@ function App() {
         </div>
       )}
       {showResult && (
-        <div className="results">
-          <h1>Votre résultat</h1>
+        <div className="results" onClick={handleEndClick}>
+          <h1>Votre score</h1>
           <p>
-            <b>{points}</b> bonne{points === 1 ? null : "s"} réponse
+            <b>{points}</b> bonne{points === 1 ? null : "s"} reponse
             {points === 1 ? null : "s"} sur <b>{maxIndex}</b>
           </p>
           <p>
-            Temps réalisé :{" "}
+            Temps realise :{" "}
             <i>
               {zeroPad(time.minutes)}:{zeroPad(time.seconds)}.
               {zeroPad(time.milliseconds, 3)}
@@ -167,8 +177,14 @@ function App() {
           </p>
           {points === maxIndex && (
             <p>
-              <b>Félicitation !</b>
+              <b>Felicitation !</b>
             </p>
+          )}
+          {points === maxIndex && (
+            <div className="pyro">
+              <div className="before"></div>
+              <div className="after"></div>
+            </div>
           )}
         </div>
       )}
