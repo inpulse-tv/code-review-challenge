@@ -9,6 +9,7 @@ $input-label-color-active: #dc2f55;
 $input-placeholder-color: #65657b;
 
 $primary-color: #08d;
+$warning-color: #dc2f55;
 $primary-color-active: #06d;
 $disable-color: #b9b8c3;
 
@@ -115,6 +116,13 @@ $checkbox-border-color: $disable-color;
 .checkbox-container {
   text-align: left;
   margin: 12px 0;
+  font-size: 0.3em;
+
+  .invalid-feedback {
+    padding-top: 10px;
+    color: $warning-color;
+    text-align: center;
+  }
 }
 
 label[for="cgu"] {
@@ -122,7 +130,6 @@ label[for="cgu"] {
   flex-direction: row;
   user-select: none;
   cursor: pointer;
-  font-size: 0.3em;
 
   span {
     display: inline-block;

@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { Formik, Field, Form, FormikHelpers } from "formik";
+import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./Register.module.scss";
-
-interface Values {
-  pseudo: string;
-  email: string;
-}
+import { IProps } from "./IProps";
+import { IValues } from "./IValues";
 
 /**
  * Register formular component.
  * @returns the formular.
  */
-const RegisterFormular = () => {
+const RegisterFormular = (props: IProps) => {
   return (
     <div className={styles.container}>
       <h4>Veuillez vous enregistrer</h4>
@@ -20,22 +17,21 @@ const RegisterFormular = () => {
         initialValues={{
           pseudo: "",
           email: "",
+          cgu: false
         }}
         validationSchema={Yup.object().shape({
           pseudo: Yup.string()
             .min(3, "Trop cours !")
             .max(12, "Trop long !")
             .required("Requis !"),
+          cgu: Yup.bool().oneOf([true], 'Veuillez accepter les conditions générales pour participer.')
         })}
         onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
+          values: IValues,
+          { setSubmitting }: FormikHelpers<IValues>
         ) => {
-          // TODO : return data to parent props
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
+          setSubmitting(false);
+          props.onSubmit(values);
         }}>
         {({ errors, touched }) => (
           <Form className={styles.register}>
@@ -68,11 +64,7 @@ const RegisterFormular = () => {
               </label>
             </div>
             <div className={styles["checkbox-container"]}>
-              <Field
-                name="cgu"
-                id="cgu"
-                type="checkbox"
-              />
+              <Field name="cgu" id="cgu" type="checkbox" />
               <label className={styles.checkbox} htmlFor="cgu">
                 <span>
                   <svg width="12px" height="9px" viewBox="0 0 12 9">
@@ -84,6 +76,7 @@ const RegisterFormular = () => {
                   inpulse.tv à utliser votre image sur leur chaîne youtube.
                 </span>
               </label>
+              <ErrorMessage name="cgu" component="div" className={styles["invalid-feedback"]} />
             </div>
             <button type="submit" className={styles.submit}>
               Démarrer le jeu

@@ -9,6 +9,7 @@ import { Leaderboard } from "./features/leaderboard/leaderboard";
 import quizzDatas from "./datas/codes.json";
 import lbDatas from "./datas/leaderboard.json";
 import RegisterFormular from "./features/forms/Register";
+import { IValues as RegistrationValues } from "./features/forms/IValues";
 
 function App() {
   const [showLeaderboard, setShowLeaderboard] = useState(true);
@@ -35,8 +36,9 @@ function App() {
   /**
    * Handle registration submit event.
    */
-  const handleRegistrationSubmit = () => {
+  const handleRegistrationSubmit = (values: RegistrationValues) => {
     setShowRegistration(false);
+    console.log(JSON.stringify(values, null, 2));
     setShowStartCountdown(true);
   };
 
@@ -122,7 +124,7 @@ function App() {
         </div>
       )}
       {showRegistration && (
-        <RegisterFormular />
+        <RegisterFormular onSubmit={handleRegistrationSubmit}/>
       )}
       {showStartCountdown && (
         <StartCountdown
