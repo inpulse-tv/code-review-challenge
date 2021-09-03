@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { StartCountdown } from "./features/countdown/StartCountdown";
 import { Quizz } from "./features/quizz/Quizz";
 import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
@@ -10,8 +10,97 @@ import quizzDatas from "./datas/codes.json";
 import lbDatas from "./datas/leaderboard.json";
 import RegisterFormular from "./features/forms/Register";
 import { IValues as RegistrationValues } from "./features/forms/IValues";
+import { ILeaderboard } from "./datas/ILeaderboard";
 
 function App() {
+  // Default user data object.
+  const userDataInit: ILeaderboard = {
+    pseudo: "",
+    email: null,
+    score: 0,
+    millisecs: 0,
+    time: "",
+  };
+
+  /**
+   * Save user data in leaderboard and localStorage.
+   * @param user User data object.
+   */
+  const saveLeaderboard = (user: ILeaderboard) => {
+    // Check if user exist.
+    const index = leaderboardData.findIndex(
+      (item) =>
+        item.pseudo?.toString().toUpperCase() ===
+        user.pseudo?.toString().toUpperCase()
+    );
+    if (index > -1) {
+      const currentData = leaderboardData[index];
+
+      // Check result.
+      if (currentData.score > user.score) return;
+      if (
+        currentData.score === user.score &&
+        currentData.millisecs > user.millisecs
+      )
+        return;
+
+      // Update user.
+      leaderboardData[index] = {
+        pseudo: user.pseudo,
+        email: user.email,
+        millisecs: user.millisecs,
+        score: user.score,
+        time: user.time,
+      };
+
+      setLeaderboardData(leaderboardData);
+      localStorage.setItem("leaderboard", JSON.stringify(leaderboardData));
+    } else {
+      // Add user.
+      const newLeaderboard: ILeaderboard[] = [...leaderboardData, user];
+      setLeaderboardData(newLeaderboard);
+      localStorage.setItem("leaderboard", JSON.stringify(newLeaderboard));
+    }
+  };
+
+  /**
+   * Get a Leaderboard object from local storage or json import if empty.
+   * @returns The leaderboard data.
+   */
+  const getLeaderboard = (): ILeaderboard[] => {
+    try {
+      const s = localStorage.getItem("leaderboard");
+      if (s === null) return lbDatas;
+      return JSON.parse(s);
+    } catch (e) {
+      return lbDatas;
+    }
+  };
+
+  /**
+   * Allow using callback on React useState hook.
+   * @param initialState current state.
+   * @returns the current state with callback to execute.
+   */
+  const useStateCallback = (initialState: any) => {
+    const [state, setState] = useState(initialState);
+    const cbRef = useRef<any>(null);
+
+    const setStateCallback = useCallback((state, cb) => {
+      cbRef.current = cb;
+      setState(state);
+    }, []);
+
+    useEffect(() => {
+      if (cbRef.current) {
+        cbRef.current(state);
+        cbRef.current = null;
+      }
+    }, [state]);
+
+    return [state, setStateCallback];
+  };
+
   const [showLeaderboard, setShowLeaderboard] = useState(true);
   const [showRegistration, setShowRegistration] = useState(false);
   const [showStartCountdown, setShowStartCountdown] = useState(false);
@@ -20,6 +109,8 @@ function App() {
   const [changeIndex, setChangeIndex] = useState(false);
   const [points, setPoints] = useState(0);
   const [time, setTime] = useState({} as ITimeDiff);
+  const [leaderboardData, setLeaderboardData] = useState(getLeaderboard());
+  const [userData, setUserData] = useStateCallback(userDataInit);
 
   const countdownRef = useRef({} as Countdown);
 
@@ -38,7 +129,7 @@ function App() {
    */
   const handleRegistrationSubmit = (values: RegistrationValues) => {
     setShowRegistration(false);
-    console.log(JSON.stringify(values, null, 2));
+    setUserData(Object.assign({}, userData, values));
     setShowStartCountdown(true);
   };
 
@@ -59,9 +150,10 @@ function App() {
    */
   const handleIndexChange = (values: [number, boolean, ITimeDiff]) => {
     const [index, isCorrect, finalDate] = values;
+    const currentScore: number = isCorrect ? points + 1 : points;
 
     // Update user score.
-    if (isCorrect) setPoints(points + 1);
+    if (isCorrect) setPoints(currentScore);
     setTime(finalDate);
 
     // Reset index change.
@@ -73,7 +165,21 @@ function App() {
       ? countdownRef.current.api?.start()
       : countdownRef.current.api?.stop();
 
+    // Last index.
     if (index >= maxIndex) {
+      // Add user score to leaderboard.
+      setUserData(
+        Object.assign({}, userData, {
+          score: currentScore,
+          millisecs: finalDate.total,
+          time: `${zeroPad(finalDate.minutes)}:${zeroPad(
+            finalDate.seconds
+          )}.${zeroPad(finalDate.milliseconds, 3)}`,
+        }),
+        (s: ILeaderboard) => saveLeaderboard(s)
+      );
+
+      // Show result.
       setShowQuizz(false);
       setShowResult(true);
     }
@@ -110,8 +216,9 @@ function App() {
    */
   const handleEndClick = (): void => {
     setShowResult(false);
-    // Reset score.
+    // Reset score and data.
     setPoints(0);
+    setUserData(userDataInit);
     setShowLeaderboard(true);
   };
 
@@ -122,7 +229,7 @@ function App() {
           <Title />
           <Leaderboard
             className="leaderboard-table"
-            datas={lbDatas}
+            datas={leaderboardData}
             excludeKeys={["email", "millisecs"]}
             maxDisplayRow={5}
             orderBy={[

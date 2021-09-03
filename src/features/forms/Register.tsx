@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./Register.module.scss";
