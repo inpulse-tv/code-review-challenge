@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./Register.module.scss";
@@ -10,6 +10,23 @@ import { IValues } from "./IValues";
  * @returns the formular.
  */
 const RegisterFormular = (props: IProps) => {
+  /**
+   * Handle escape key press
+   */
+  const escFunction = useCallback((event) => {
+    if (event.keyCode === 27) {
+      if (props.onEscapePress) props.onEscapePress();
+    }
+  }, [props]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
+
   return (
     <div className={styles.container}>
       <h4>Veuillez vous enregistrer</h4>
@@ -17,14 +34,17 @@ const RegisterFormular = (props: IProps) => {
         initialValues={{
           pseudo: "",
           email: "",
-          cgu: false
+          cgu: false,
         }}
         validationSchema={Yup.object().shape({
           pseudo: Yup.string()
             .min(3, "Trop cours !")
             .max(12, "Trop long !")
             .required("Requis !"),
-          cgu: Yup.bool().oneOf([true], 'Veuillez accepter les conditions générales pour participer.')
+          cgu: Yup.bool().oneOf(
+            [true],
+            "Veuillez accepter les conditions générales pour participer."
+          ),
         })}
         onSubmit={(
           values: IValues,
@@ -76,7 +96,11 @@ const RegisterFormular = (props: IProps) => {
                   inpulse.tv à utiliser votre image sur leur chaîne youtube.
                 </span>
               </label>
-              <ErrorMessage name="cgu" component="div" className={styles["invalid-feedback"]} />
+              <ErrorMessage
+                name="cgu"
+                component="div"
+                className={styles["invalid-feedback"]}
+              />
             </div>
             <button type="submit" className={styles.submit}>
               Démarrer le jeu

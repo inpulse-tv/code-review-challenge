@@ -134,6 +134,14 @@ function App() {
   };
 
   /**
+   * handle escape key press event from registration formular.
+   */
+  const handleEscapeKeyPress = () => {
+    setShowLeaderboard(true);
+    setShowRegistration(false);
+  };
+
+  /**
    * Check Start Countdown end duration for redirection.
    * @param time Remaining time.
    */
@@ -241,7 +249,10 @@ function App() {
         </div>
       )}
       {showRegistration && (
-        <RegisterFormular onSubmit={handleRegistrationSubmit} />
+        <RegisterFormular
+          onSubmit={handleRegistrationSubmit}
+          onEscapePress={handleEscapeKeyPress}
+        />
       )}
       {showStartCountdown && (
         <StartCountdown
