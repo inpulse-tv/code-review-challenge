@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { StartCountdown } from "./features/countdown/StartCountdown";
 import { Quizz } from "./features/quizz/Quizz";
 import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
@@ -11,32 +11,9 @@ import RegisterFormular from "./features/forms/Register";
 import { IValues as RegistrationValues } from "./features/forms/IValues";
 import { ILeaderboard } from "./datas/ILeaderboard";
 import LeaderboardService from "./features/leaderboard/leaderboard.service";
+import useStateCallback from "./hooks/StateCallback";
 
 function App() {
-  /**
-   * Allow using callback on React useState hook.
-   * @param initialState current state.
-   * @returns the current state with callback to execute.
-   */
-  const useStateCallback = (initialState: any) => {
-    const [state, setState] = useState(initialState);
-    const cbRef = useRef<any>(null);
-
-    const setStateCallback = useCallback((state, cb) => {
-      cbRef.current = cb;
-      setState(state);
-    }, []);
-
-    useEffect(() => {
-      if (cbRef.current) {
-        cbRef.current(state);
-        cbRef.current = null;
-      }
-    }, [state]);
-
-    return [state, setStateCallback];
-  };
-
   const lbService = new LeaderboardService();
 
   const [showLeaderboard, setShowLeaderboard] = useState(true);
