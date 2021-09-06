@@ -1,5 +1,12 @@
-import React, { useEffect, useCallback } from "react";
-import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
+import React, { useRef, useEffect, useCallback } from "react";
+import {
+  Formik,
+  Field,
+  Form,
+  FormikHelpers,
+  FormikProps,
+  ErrorMessage,
+} from "formik";
 import * as Yup from "yup";
 import styles from "./Register.module.scss";
 import { IProps } from "./IProps";
@@ -10,27 +17,38 @@ import { IValues } from "./IValues";
  * @returns the formular.
  */
 const RegisterFormular = (props: IProps) => {
+  const formRef = useRef<FormikProps<IValues>>(null);
+
   /**
-   * Handle escape key press
+   * Handle key press event
    */
-  const escFunction = useCallback((event) => {
-    if (event.keyCode === 27) {
-      if (props.onEscapePress) props.onEscapePress();
-    }
-  }, [props]);
+  const onKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLFormElement> | KeyboardEvent) => {
+      // Manage escape key.
+      if (event.key === "Escape") {
+        if (props.onEscapePress) props.onEscapePress();
+      }
+      // Manage return key out of formik component.
+      if (event.key === "Enter") {
+        formRef.current?.submitForm();
+      }
+    },
+    [props]
+  );
 
   useEffect(() => {
-    document.addEventListener("keydown", escFunction, false);
+    document.addEventListener("keydown", (e) => onKeyDown(e), false);
 
     return () => {
-      document.removeEventListener("keydown", escFunction, false);
+      document.removeEventListener("keydown", (e) => onKeyDown(e), false);
     };
-  }, [escFunction]);
+  }, [onKeyDown]);
 
   return (
     <div className={styles.container}>
       <h4>Veuillez vous enregistrer</h4>
       <Formik
+        innerRef={formRef}
         initialValues={{
           pseudo: "",
           email: "",
@@ -53,8 +71,12 @@ const RegisterFormular = (props: IProps) => {
           setSubmitting(false);
           props.onSubmit(values);
         }}>
-        {({ errors, touched }) => (
-          <Form className={styles.register}>
+        {({ errors, touched, isSubmitting }) => (
+          <Form
+            className={styles.register}
+            onKeyDown={(e) => {
+              onKeyDown(e);
+            }}>
             <div className={styles["input-container"]}>
               <Field
                 id="pseudo"
@@ -102,7 +124,10 @@ const RegisterFormular = (props: IProps) => {
                 className={styles["invalid-feedback"]}
               />
             </div>
-            <button type="submit" className={styles.submit}>
+            <button
+              type="submit"
+              className={styles.submit}
+              disabled={isSubmitting}>
               Démarrer le jeu
             </button>
           </Form>

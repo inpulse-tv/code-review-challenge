@@ -78,7 +78,9 @@ export class Leaderboard extends React.Component<IProps> {
     if (this.props.orderBy) {
       let fieldsOrder: { (a: ILeaderboard, b: ILeaderboard): number }[] = [];
       this.props.orderBy.forEach((order) => {
-        fieldsOrder.push((a, b) => this.compare(a[order.key], b[order.key], order.isReverse));
+        fieldsOrder.push((a, b) =>
+          this.compare(a[order.key], b[order.key], order.isReverse)
+        );
       });
       items = items.sort(this.sortBy(...fieldsOrder));
     }
@@ -120,8 +122,8 @@ interface IRow {
 const RenderRow = (props: IRow): JSX.Element => {
   return (
     <>
-      {props.keys.map((key) => {
-        return <td key={props.data[key]}>{props.data[key]}</td>;
+      {props.keys.map((key, index) => {
+        return <td key={index}>{props.data[key]}</td>;
       })}
     </>
   );
