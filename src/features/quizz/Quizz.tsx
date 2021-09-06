@@ -42,11 +42,10 @@ export class Quizz extends React.Component<IProps, IState> {
     const circle = document.createElement("span");
     const diameter = Math.max(400, 400);
     const radius = diameter / 2;
-    const margin = 80;
 
     circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${e.screenX - radius}px`;
-    circle.style.top = `${e.screenY - radius - margin}px`;
+    circle.style.left = `${e.clientX - radius}px`;
+    circle.style.top = `${e.clientY - radius}px`;
     let classNames: string[] = [];
     classNames.push(styles.ripple);
     classNames.push(
