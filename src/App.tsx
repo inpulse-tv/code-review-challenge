@@ -7,76 +7,12 @@ import "./App.scss";
 import { ITimeDiff } from "./utils/timeDiff";
 import { Leaderboard } from "./features/leaderboard/leaderboard";
 import quizzDatas from "./datas/codes.json";
-import lbDatas from "./datas/leaderboard.json";
 import RegisterFormular from "./features/forms/Register";
 import { IValues as RegistrationValues } from "./features/forms/IValues";
 import { ILeaderboard } from "./datas/ILeaderboard";
+import LeaderboardService from "./features/leaderboard/leaderboard.service";
 
 function App() {
-  // Default user data object.
-  const userDataInit: ILeaderboard = {
-    pseudo: "",
-    email: null,
-    score: 0,
-    millisecs: 0,
-    time: "",
-  };
-
-  /**
-   * Save user data in leaderboard and localStorage.
-   * @param user User data object.
-   */
-  const saveLeaderboard = (user: ILeaderboard) => {
-    // Check if user exist.
-    const index = leaderboardData.findIndex(
-      (item) =>
-        item.pseudo?.toString().toUpperCase() ===
-        user.pseudo?.toString().toUpperCase()
-    );
-    if (index > -1) {
-      const currentData = leaderboardData[index];
-
-      // Check result.
-      if (currentData.score > user.score) return;
-      if (
-        currentData.score === user.score &&
-        currentData.millisecs > user.millisecs
-      )
-        return;
-
-      // Update user.
-      leaderboardData[index] = {
-        pseudo: user.pseudo,
-        email: user.email,
-        millisecs: user.millisecs,
-        score: user.score,
-        time: user.time,
-      };
-
-      setLeaderboardData(leaderboardData);
-      localStorage.setItem("leaderboard", JSON.stringify(leaderboardData));
-    } else {
-      // Add user.
-      const newLeaderboard: ILeaderboard[] = [...leaderboardData, user];
-      setLeaderboardData(newLeaderboard);
-      localStorage.setItem("leaderboard", JSON.stringify(newLeaderboard));
-    }
-  };
-
-  /**
-   * Get a Leaderboard object from local storage or json import if empty.
-   * @returns The leaderboard data.
-   */
-  const getLeaderboard = (): ILeaderboard[] => {
-    try {
-      const s = localStorage.getItem("leaderboard");
-      if (s === null) return lbDatas;
-      return JSON.parse(s);
-    } catch (e) {
-      return lbDatas;
-    }
-  };
-
   /**
    * Allow using callback on React useState hook.
    * @param initialState current state.
@@ -101,6 +37,8 @@ function App() {
     return [state, setStateCallback];
   };
 
+  const lbService = new LeaderboardService();
+
   const [showLeaderboard, setShowLeaderboard] = useState(true);
   const [showRegistration, setShowRegistration] = useState(false);
   const [showStartCountdown, setShowStartCountdown] = useState(false);
@@ -109,12 +47,20 @@ function App() {
   const [changeIndex, setChangeIndex] = useState(false);
   const [points, setPoints] = useState(0);
   const [time, setTime] = useState({} as ITimeDiff);
-  const [leaderboardData, setLeaderboardData] = useState(getLeaderboard());
-  const [userData, setUserData] = useStateCallback(userDataInit);
+  const [leaderboardData, setLeaderboardData] = useState(lbService.load());
+  const [userData, setUserData] = useStateCallback(lbService.userInit);
 
   const countdownRef = useRef({} as Countdown);
 
   const maxIndex: number = 3;
+
+  /**
+   * Save user data in leaderboard.
+   * @param user User data.
+   */
+  const saveLeaderboard = (user: ILeaderboard) => {
+    setLeaderboardData(lbService.save(user));
+  };
 
   /**
    * Handle click event on leaderboard.
@@ -226,7 +172,7 @@ function App() {
     setShowResult(false);
     // Reset score and data.
     setPoints(0);
-    setUserData(userDataInit);
+    setUserData(lbService.userInit);
     setShowLeaderboard(true);
   };
 
