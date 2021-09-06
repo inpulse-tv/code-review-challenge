@@ -5,11 +5,13 @@ import { useState, useRef, useCallback, useEffect } from "react";
  * @param initialState current state.
  * @returns the current state with callback to execute.
  */
-const useStateCallback = (initialState: any) => {
+const useStateCallback = <T>(
+  initialState: T | (() => T)
+): [T, (state: T, cb?: any) => void] => {
   const [state, setState] = useState(initialState);
   const cbRef = useRef<any>(null);
 
-  const setStateCallback = useCallback((state, cb) => {
+  const setStateCallback = useCallback((state: T, cb: any) => {
     cbRef.current = cb;
     setState(state);
   }, []);
