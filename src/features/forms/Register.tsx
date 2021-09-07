@@ -46,7 +46,7 @@ const RegisterFormular = (props: IProps) => {
 
   return (
     <div className={styles.container}>
-      <h4>Veuillez vous enregistrer</h4>
+      <h2>Veuillez vous enregistrer</h2>
       <Formik
         innerRef={formRef}
         initialValues={{

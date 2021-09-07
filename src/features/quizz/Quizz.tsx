@@ -171,11 +171,11 @@ export class Quizz extends React.Component<IProps, IState> {
       );
       html =
         html.substring(0, startIndex) +
-        `<span class="answer">${wrongText}</span>` +
+        `<span class=${styles.answer}>${wrongText}</span>` +
         html.substring(startIndex + indexLength);
       currentElm.innerHTML = html;
       currentElm
-        .getElementsByClassName("answer")[0]
+        .getElementsByClassName(styles.answer)[0]
         .addEventListener("click", this.handleValidateClick);
     }
   }
@@ -219,7 +219,7 @@ export class Quizz extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <pre ref={this.preElm} className={`prettyprint ${this.state.langCode}`}>
+      <pre ref={this.preElm} className={`prettyprint lang-${this.state.langCode}`}>
         <code onClick={this.handleClick}>{this.state.code}</code>
       </pre>
     );

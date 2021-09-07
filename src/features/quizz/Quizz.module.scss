@@ -32,6 +32,11 @@ span.ripple {
   }
 }
 
+span.answer {
+  /* for debug only */
+  //font-weight: bold;
+}
+
 @keyframes ripple {
   to {
     transform: scale(1);

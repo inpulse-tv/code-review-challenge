@@ -1,7 +1,7 @@
 [
   {
     "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date, parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
-    "language": "lang-py",
+    "language": "py",
     "range": {
       "start": 49,
       "length": 4
@@ -9,7 +9,7 @@
   },
   {
     "code": "numpy as np\nB = np.ones((3,2))\nprint(B)\nB.shape\nB.sum()",
-    "language": "lang-py",
+    "language": "py",
     "range": {
       "start": 0,
       "length": 5
@@ -17,9 +17,81 @@
   },
   {
     "code": "def mafonction(a,b,c):\n    resultat = a+b*b+c\n    rturn resultat",
-    "language": "lang-py",
+    "language": "py",
     "range": {
       "start": 50,
+      "length": 5
+    }
+  },
+  {
+    "code": "SELECT pub_id, GROUP_CONCAT(DISTINCT cate_id)\nFROM book_mast\nGROUP BY pub_id\nORDER BY GROUP_CONCAT(DISTINCT cate) ASC;",
+    "language": "sql",
+    "range": {
+      "start": 108,
+      "length": 4
+    }
+  },
+  {
+    "code": "SELECT pub_id, GROUP_CONCAT(DISTINCT cate_id)\nFROM book_mast\nGROUP pub_id;",
+    "language": "sql",
+    "range": {
+      "start": 64,
+      "length": 5
+    }
+  },
+  {
+    "code": "SELECT student.first_name, student.last_name, AVG(mark) avg_mark \nFROM subject\nJOIN student on student.ID = subject.stud_id\nJOIN marks on marks.id = subject.mark_id\nGROUP BY student.first, student.last\nHAVING AVG(mar) > 9;",
+    "language": "sql",
+    "range": {
+      "start": 212,
+      "length": 5
+    }
+  },
+  {
+    "code": "SELECT SUM(total_cost)\nFROM purchase\nWHERE cate_id = CA2019;",
+    "language": "sql",
+    "range": {
+      "start": 53,
+      "length": 6
+    }
+  },
+  {
+    "code": "SELECT cate_id,\nSUM(receive_qty*purch_price)\nFOR purchase\nGROUP BY cate_id;",
+    "language": "sql",
+    "range": {
+      "start": 45,
+      "length": 3
+    }
+  },
+  {
+    "code": "SELECT SUM(mysum)\nFROM(\nSELECT COUNT(*) :: mysum\nFROM book_mast\nWHERE no_page>200) AS bb;",
+    "language": "sql",
+    "range": {
+      "start": 39,
+      "length": 4
+    }
+  },
+  {
+    "code": "SELECT L.NomLog, L.PrixLog FROM Logiciel L INNER JOIN Projet P\nON L.NumProj=P.NumProj WHERE P.TitreProj 'gestion de stock'\nORDER BY L.PrixLog DESC;",
+    "language": "sql",
+    "range": {
+      "start": 101,
+      "length": 5
+    }
+  },
+  {
+    "code": "SELECT NumProj, TitreProj FROM Projet P\nINNER JOIN Realisation R ON P.NumProj=R.NumProj\nGROUP BY NumProj TitreProj\nHAVING count(*)=(SELECT COUNT(*) FROM Developpeur);",
+    "language": "sql",
+    "range": {
+      "start": 102,
+      "length": 5
+    }
+  },
+  {
+    "code": "SELECT COUNT(*) FROM ENSEIGNANT E\nINNER JOIN MATIERE M ON M.CodeMat=E.CodeMat \nWHERE M NomMat='Informatique';",
+    "language": "sql",
+    "range": {
+      "start": 85,
       "length": 5
     }
   }
