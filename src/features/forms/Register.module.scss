@@ -47,13 +47,13 @@ $checkbox-border-color: $disable-color;
   font-size: 24px;
   height: 100%;
   outline: 0;
-  padding: 0.2em 1em 0;
+  padding: 30px 30px 0;
   width: 100%;
 }
 
 .cut {
   background-color: $input-label-bg-color;
-  border-radius: 0.2em;
+  border-radius: 6px;
   opacity: 0;
   height: 40px;
   left: 20px;
@@ -116,7 +116,7 @@ $checkbox-border-color: $disable-color;
 .checkbox-container {
   text-align: left;
   margin: 12px 0;
-  font-size: 0.3em;
+  font-size: 16px;
 
   .invalid-feedback {
     padding-top: 10px;
