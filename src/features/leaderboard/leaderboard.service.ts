@@ -7,8 +7,8 @@ import lbDatas from "../../datas/leaderboard.json";
 export default class LeaderboardService {
   // Default user data object.
   userInit: ILeaderboard = {
-    pseudo: "",
-    email: null,
+    name: "",
+    email: "",
     score: 0,
     millisecs: 0,
     time: "",
@@ -26,8 +26,9 @@ export default class LeaderboardService {
     // Check if user exist.
     const index = this.leaderboardData.findIndex(
       (item) =>
-        item.pseudo?.toString().toUpperCase() ===
-        user.pseudo?.toString().toUpperCase()
+        item.name?.toString().toUpperCase() ===
+          user.name?.toString().toUpperCase() &&
+        item.email?.toLowerCase() === user.email?.toLocaleLowerCase()
     );
     if (index > -1) {
       const currentData = this.leaderboardData[index];
@@ -42,7 +43,7 @@ export default class LeaderboardService {
 
       // Update user.
       this.leaderboardData[index] = {
-        pseudo: user.pseudo,
+        name: user.name,
         email: user.email,
         millisecs: user.millisecs,
         score: user.score,
@@ -64,7 +65,7 @@ export default class LeaderboardService {
   load = (): ILeaderboard[] => {
     try {
       const s = localStorage.getItem("leaderboard");
-      this.leaderboardData = (s === null) ? lbDatas : JSON.parse(s);
+      this.leaderboardData = s === null ? lbDatas : JSON.parse(s);
       return this.leaderboardData;
     } catch (e) {
       return lbDatas;

@@ -1,5 +1,5 @@
 export interface IValues {
-  pseudo: string;
+  name: string;
   email: string;
   cgu: boolean;
 }

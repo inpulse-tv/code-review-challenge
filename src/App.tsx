@@ -76,7 +76,8 @@ function App() {
   };
 
   /**
-   * Check quizz current index for redirection.
+   * Check quizz current index for score saving to leaderboard
+   * and redirection to score result.
    * @param index Current index.
    */
   const handleIndexChange = (values: [number, boolean, ITimeDiff]) => {

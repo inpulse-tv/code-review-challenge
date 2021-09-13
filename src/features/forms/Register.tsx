@@ -50,12 +50,12 @@ const RegisterFormular = (props: IProps) => {
       <Formik
         innerRef={formRef}
         initialValues={{
-          pseudo: "",
+          name: "",
           email: "",
           cgu: false,
         }}
         validationSchema={Yup.object().shape({
-          pseudo: Yup.string()
+          name: Yup.string()
             .min(3, "Trop cours !")
             .max(12, "Trop long !")
             .required("Requis !"),
@@ -79,16 +79,16 @@ const RegisterFormular = (props: IProps) => {
             }}>
             <div className={styles["input-container"]}>
               <Field
-                id="pseudo"
-                name="pseudo"
+                id="name"
+                name="name"
                 placeholder=" "
                 className={styles.input}
               />
               <div className={styles.cut}></div>
-              <label htmlFor="pseudo" className={styles.placeholder}>
-                Pseudo{" "}
-                {errors.pseudo && touched.pseudo
-                  ? `... ${errors.pseudo}`
+              <label htmlFor="name" className={styles.placeholder}>
+                Nom{" "}
+                {errors.name && touched.name
+                  ? `... ${errors.name}`
                   : null}
               </label>
             </div>
