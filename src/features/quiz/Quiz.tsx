@@ -1,17 +1,17 @@
 import React, { MouseEvent as ReactMouseEvent } from "react";
-import styles from "./Quizz.module.scss";
+import styles from "./Quiz.module.scss";
 import { IProps } from "./IProps";
 import { IState } from "./IState";
 import { ICode } from "../../datas/ICode";
 import { getTimeDiff, ITimeDiff } from "../../utils/timeDiff";
 
 /**
- * Quizz component.
+ * Quiz component.
  * Return the n first codes randomly get from the json codes datasource.
  * Access to the next code after a click on the component.
  * If the click is on the validate zone, a point is attribute.
  */
-export class Quizz extends React.Component<IProps, IState> {
+export class Quiz extends React.Component<IProps, IState> {
   preElm: React.RefObject<HTMLPreElement> | undefined;
   isClicked: boolean = false;
   rippleDuration: number = parseInt(styles.rippleDuration);
@@ -29,7 +29,7 @@ export class Quizz extends React.Component<IProps, IState> {
     this.handleClick = this.handleClick.bind(this);
     this.handleIndexChange = this.handleIndexChange.bind(this);
     this.handleValidateClick = this.handleValidateClick.bind(this);
-    this.nextQuizz = this.nextQuizz.bind(this);
+    this.nextQuiz = this.nextQuiz.bind(this);
     this.preElm = React.createRef();
   }
 
@@ -115,13 +115,13 @@ export class Quizz extends React.Component<IProps, IState> {
     if (this.isClicked) return;
     this.isClicked = true;
     // Add and render Ripple from answer.
-    this.addRippleClick(e, this.nextQuizz);
+    this.addRippleClick(e, this.nextQuiz);
   }
 
   /**
    * Select next code on the list.
    */
-  nextQuizz(): void {
+  nextQuiz(): void {
     this.setState(
       (state, props) => {
         const newIndex: number = state.index + 1;
@@ -181,7 +181,7 @@ export class Quizz extends React.Component<IProps, IState> {
   }
 
   /**
-   * Return the quizz current index.
+   * Return the quiz current index.
    */
   handleIndexChange(): void {
     const finalDate:ITimeDiff = getTimeDiff(this.state.startDate, new Date());
@@ -189,7 +189,7 @@ export class Quizz extends React.Component<IProps, IState> {
   }
 
   componentDidMount(): void {
-    // Get Quizz.
+    // Get Quiz.
     const unOrderedList: Array<ICode> = this.getUnOrderedCodes();
     this.setState(
       () => {
@@ -207,13 +207,13 @@ export class Quizz extends React.Component<IProps, IState> {
   }
 
   componentDidUpdate(prevProps: IProps, prevState: IState): void {
-    // Change Quizz if countdown duration set 0 and ask for new index.
+    // Change Quiz if countdown duration set 0 and ask for new index.
     if (
       this.props.changeIndex !== undefined &&
       prevProps.changeIndex !== this.props.changeIndex &&
       this.props.changeIndex
     ) {
-      this.nextQuizz();
+      this.nextQuiz();
     }
   }
 

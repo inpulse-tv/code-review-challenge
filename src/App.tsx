@@ -1,12 +1,12 @@
 import React, { useState, useRef } from "react";
 import { StartCountdown } from "./features/countdown/StartCountdown";
-import { Quizz } from "./features/quizz/Quizz";
+import { Quiz } from "./features/quiz/Quiz";
 import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
 
 import "./App.scss";
 import { ITimeDiff } from "./utils/timeDiff";
 import { Leaderboard } from "./features/leaderboard/leaderboard";
-import quizzDatas from "./datas/codes.json";
+import quizDatas from "./datas/codes.json";
 import RegisterFormular from "./features/forms/Register";
 import { IValues as RegistrationValues } from "./features/forms/IValues";
 import { ILeaderboard } from "./datas/ILeaderboard";
@@ -19,7 +19,7 @@ function App() {
   const [showLeaderboard, setShowLeaderboard] = useState(true);
   const [showRegistration, setShowRegistration] = useState(false);
   const [showStartCountdown, setShowStartCountdown] = useState(false);
-  const [showQuizz, setShowQuizz] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [changeIndex, setChangeIndex] = useState(false);
   const [points, setPoints] = useState(0);
@@ -71,12 +71,12 @@ function App() {
   const handleCountdownTimeChange = (time: number) => {
     if (time < 0) {
       setShowStartCountdown(false);
-      setShowQuizz(true);
+      setShowQuiz(true);
     }
   };
 
   /**
-   * Check quizz current index for score saving to leaderboard
+   * Check quiz current index for score saving to leaderboard
    * and redirection to score result.
    * @param index Current index.
    */
@@ -112,7 +112,7 @@ function App() {
       );
 
       // Show result.
-      setShowQuizz(false);
+      setShowQuiz(false);
       setShowResult(true);
     }
   };
@@ -131,7 +131,7 @@ function App() {
    * Handle the onComplete react-countdown event.
    */
   const handleCountdownComplete = (): void => {
-    // Set new Quizz index.
+    // Set new Quiz index.
     setChangeIndex(true);
   };
 
@@ -185,7 +185,7 @@ function App() {
           endText="START !"
         />
       )}
-      {showQuizz && (
+      {showQuiz && (
         <div>
           <Countdown
             date={Date.now() + 59000}
@@ -194,8 +194,8 @@ function App() {
             onStop={handleCountdownStop}
             ref={countdownRef}
           />
-          <Quizz
-            datas={quizzDatas}
+          <Quiz
+            datas={quizDatas}
             onIndexChange={handleIndexChange}
             maxIndex={maxIndex}
             startIndex={0}
