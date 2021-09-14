@@ -94,5 +94,117 @@
       "start": 85,
       "length": 5
     }
+  },
+  {
+    "code": "#!/bin/bash\nn=10\nif [ $n -lt 10 ];\nthen\necho \"Click here if this is executed\"\nelse\necho \"Click here if this is executed\"\nfi",
+    "language": "bash",
+    "range": {
+      "start": 89,
+      "length": 30
+    }
+  },
+  {
+    "code": "x = 67;\ny = 33;\n\ny *= 2;\ny++;\n\nif ( x = y ) {\n  cout << \"X and Y are equal\";\n} else {\n  cout << \"X and Y are not equal\";\n}",
+    "language": "cpp",
+    "range": {
+      "start": 36,
+      "length": 5
+    }
+  },
+  {
+    "code": "Qu'est-ce qui est imprimé ?\n\ny = 33;\ny <<= 1;\ncout << y;\n\n33\n34\n16\n66\nfalse",
+    "language": "cpp",
+    "range": {
+      "start": 68,
+      "length": 2
+    }
+  },
+  {
+    "code": "<html>\n  <body>\n    <p><a link=\"https://inpulse.tv\">link</a></p>\n  </body>\n</html>",
+    "language": "html",
+    "range": {
+      "start": 47,
+      "length": 4
+    }
+  },
+  {
+    "code": "Cliquez sur la vraie déclaration\n\n( x/4 == x>>2 )\n( x*4 == x<<2 )\n( x*4 == x>>2 )\n( x/4 == x<<2 )",
+    "language": "cpp",
+    "range": {
+      "start": 55,
+      "length": 22
+    }
+  },
+  {
+    "code": "<html onload=\"alert('html is loaded')\">\n  <body onload=\"alert('body is loaded')\">\n    <p>lorem ipsum</p>\n  </body>\n</html>>",
+    "language": "html",
+    "range": {
+      "start": 9,
+      "length": 32
+    }
+  },
+  {
+    "code": "Go est un language de progammation qui est ...\n\n- compilé\n- interprété\n- typé dynamiquement",
+    "language": "html",
+    "range": {
+      "start": 48,
+      "length": 9
+    }
+  },
+  {
+    "code": "Quelle réponse est syntaxiquement correcte ?\n\n- var int a\n- var a, b, java bool\n- var := 3",
+    "language": "go",
+    "range": {
+      "start": 57,
+      "length": 21
+    }
+  },
+  {
+    "code": "package main\nimport \"fmt\"\n\nfunc main() {\n  var i int\n  var f float64\n  var b boolean\n  var s string\n  fmt.Printf(\"%v %v %v %q\\n\", i, f, b, s)\n}",
+    "language": "go",
+    "range": {
+      "start": 77,
+      "length": 7
+    }
+  },
+  {
+    "code": "package main\nimport \"fmt\"\n\nfunc main() {\n  var i int\n  var f float64\n  var b boolean\n  var s string\n  fmt.Printf(\"%v %v %v %q\\n\", i, f, b, s)\n}",
+    "language": "go",
+    "range": {
+      "start": 77,
+      "length": 7
+    }
+  },
+  {
+    "code": "Comment convertir a := 3 en Go ?\n\n- float64(a)\n- var a float64 = float64(a)\n- var b float64 = float64(a)",
+    "language": "go",
+    "range": {
+      "start": 76,
+      "length": 28
+    }
+  },
+  {
+    "code": "func main() {\n  names := string[4]{\n      \"John\",\n      \"Paul\",\n      \"George\",\n      \"Ringo\",\n  }\n  fmt.Print(names)\n}",
+    "language": "html",
+    "range": {
+      "start": 30,
+      "length": 5
+    }
+  },
+  {
+    "code": "Sur quels types de données pouvez-vous utiliser\n\"for -range\" ?\n\n- array, slice, map\n- slice, map, array, string, channel\n- slice, string, map, channel\n- slice, map, string",
+    "language": "go",
+    "range": {
+      "start": 84,
+      "length": 36
+    }
+  },
+  {
+    "code": "Quand la fonction init() sera-t-elle appelée ?\n\n- Après avoir importé un package avec une fonction init() définie\n- Seulement quand on l'appelle\n- Après la fonction main() dans le package principal",
+    "language": "html",
+    "range": {
+      "start": 114,
+      "length": 30
+    }
   }
 ]
