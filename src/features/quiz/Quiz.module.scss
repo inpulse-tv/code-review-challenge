@@ -37,6 +37,11 @@ span.answer {
   //font-weight: bold;
 }
 
+div.statement {
+  margin-bottom: 0.5em;
+  white-space: normal;
+}
+
 @keyframes ripple {
   to {
     transform: scale(1);

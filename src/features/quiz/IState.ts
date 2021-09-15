@@ -2,8 +2,9 @@ import { ICode } from "../../datas/ICode";
 
 export interface IState {
   unOrderedList: Array<ICode>;
-  code: string | null;
-  langCode: string | null;
+  statement?: string;
+  code?: string;
+  langCode?: string;
   index: number;
   isCorrect: boolean;
   startDate: Date;

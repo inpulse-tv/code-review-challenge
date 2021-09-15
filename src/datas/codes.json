@@ -1,5 +1,6 @@
 [
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date, parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
     "language": "py",
     "range": {
@@ -8,6 +9,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "numpy as np\nB = np.ones((3,2))\nprint(B)\nB.shape\nB.sum()",
     "language": "py",
     "range": {
@@ -16,6 +18,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "def mafonction(a,b,c):\n    resultat = a+b*b+c\n    rturn resultat",
     "language": "py",
     "range": {
@@ -24,6 +27,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT pub_id, GROUP_CONCAT(DISTINCT cate_id)\nFROM book_mast\nGROUP BY pub_id\nORDER BY GROUP_CONCAT(DISTINCT cate) ASC;",
     "language": "sql",
     "range": {
@@ -32,6 +36,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT pub_id, GROUP_CONCAT(DISTINCT cate_id)\nFROM book_mast\nGROUP pub_id;",
     "language": "sql",
     "range": {
@@ -40,6 +45,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT student.first_name, student.last_name, AVG(mark) avg_mark \nFROM subject\nJOIN student on student.ID = subject.stud_id\nJOIN marks on marks.id = subject.mark_id\nGROUP BY student.first, student.last\nHAVING AVG(mar) > 9;",
     "language": "sql",
     "range": {
@@ -48,6 +54,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT SUM(total_cost)\nFROM purchase\nWHERE cate_id = CA2019;",
     "language": "sql",
     "range": {
@@ -56,6 +63,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT cate_id,\nSUM(receive_qty*purch_price)\nFOR purchase\nGROUP BY cate_id;",
     "language": "sql",
     "range": {
@@ -64,6 +72,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT SUM(mysum)\nFROM(\nSELECT COUNT(*) :: mysum\nFROM book_mast\nWHERE no_page>200) AS bb;",
     "language": "sql",
     "range": {
@@ -72,6 +81,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT L.NomLog, L.PrixLog FROM Logiciel L INNER JOIN Projet P\nON L.NumProj=P.NumProj WHERE P.TitreProj 'gestion de stock'\nORDER BY L.PrixLog DESC;",
     "language": "sql",
     "range": {
@@ -80,6 +90,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT NumProj, TitreProj FROM Projet P\nINNER JOIN Realisation R ON P.NumProj=R.NumProj\nGROUP BY NumProj TitreProj\nHAVING count(*)=(SELECT COUNT(*) FROM Developpeur);",
     "language": "sql",
     "range": {
@@ -88,6 +99,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT COUNT(*) FROM ENSEIGNANT E\nINNER JOIN MATIERE M ON M.CodeMat=E.CodeMat \nWHERE M NomMat='Informatique';",
     "language": "sql",
     "range": {
@@ -96,6 +108,7 @@
     }
   },
   {
+    "statement": "Quelle condition est exécutée ?",
     "code": "#!/bin/bash\nn=10\nif [ $n -lt 10 ];\nthen\necho \"Click here if this is executed\"\nelse\necho \"Click here if this is executed\"\nfi",
     "language": "bash",
     "range": {
@@ -104,6 +117,7 @@
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "x = 67;\ny = 33;\n\ny *= 2;\ny++;\n\nif ( x = y ) {\n  cout << \"X and Y are equal\";\n} else {\n  cout << \"X and Y are not equal\";\n}",
     "language": "cpp",
     "range": {
@@ -112,14 +126,16 @@
     }
   },
   {
-    "code": "Qu'est-ce qui est imprimé ?\n\ny = 33;\ny <<= 1;\ncout << y;\n\n33\n34\n16\n66\nfalse",
+    "statement": "Qu'elle est la valeur de sortie ?",
+    "code": "y = 33;\ny <<= 1;\ncout << y;\n\n33\n34\n16\n66\nfalse",
     "language": "cpp",
     "range": {
-      "start": 68,
+      "start": 50,
       "length": 2
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "<html>\n  <body>\n    <p><a link=\"https://inpulse.tv\">link</a></p>\n  </body>\n</html>",
     "language": "html",
     "range": {
@@ -128,14 +144,16 @@
     }
   },
   {
-    "code": "Cliquez sur la vraie déclaration\n\n( x/4 == x>>2 )\n( x*4 == x<<2 )\n( x*4 == x>>2 )\n( x/4 == x<<2 )",
+    "statement": "Cliquez sur la vraie déclaration",
+    "code": "( x/4 == x>>2 )\n( x*4 == x<<2 )\n( x*4 == x>>2 )\n( x/4 == x<<2 )",
     "language": "cpp",
     "range": {
-      "start": 55,
+      "start": 19,
       "length": 22
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "<html onload=\"alert('html is loaded')\">\n  <body onload=\"alert('body is loaded')\">\n    <p>lorem ipsum</p>\n  </body>\n</html>>",
     "language": "html",
     "range": {
@@ -144,22 +162,25 @@
     }
   },
   {
-    "code": "Go est un language de progammation qui est ...\n\n- compilé\n- interprété\n- typé dynamiquement",
-    "language": "html",
+    "statement": "Go est un language de progammation qui est ...",
+    "code": "- compilé\n- interprété\n- typé dynamiquement",
+    "language": "txt",
     "range": {
-      "start": 48,
+      "start": 0,
       "length": 9
     }
   },
   {
-    "code": "Quelle réponse est syntaxiquement correcte ?\n\n- var int a\n- var a, b, java bool\n- var := 3",
+    "statement": "Quelle réponse est syntaxiquement correcte ?",
+    "code": "- var int a\n- var a, b, java bool\n- var := 3",
     "language": "go",
     "range": {
-      "start": 57,
+      "start": 11,
       "length": 21
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "package main\nimport \"fmt\"\n\nfunc main() {\n  var i int\n  var f float64\n  var b boolean\n  var s string\n  fmt.Printf(\"%v %v %v %q\\n\", i, f, b, s)\n}",
     "language": "go",
     "range": {
@@ -168,43 +189,47 @@
     }
   },
   {
-    "code": "package main\nimport \"fmt\"\n\nfunc main() {\n  var i int\n  var f float64\n  var b boolean\n  var s string\n  fmt.Printf(\"%v %v %v %q\\n\", i, f, b, s)\n}",
+    "statement": "Comment convertir a := 3 en Go ?",
+    "code": "- float64(a)\n- var a float64 = float64(a)\n- var b float64 = float64(a)",
     "language": "go",
     "range": {
-      "start": 77,
-      "length": 7
-    }
-  },
-  {
-    "code": "Comment convertir a := 3 en Go ?\n\n- float64(a)\n- var a float64 = float64(a)\n- var b float64 = float64(a)",
-    "language": "go",
-    "range": {
-      "start": 76,
+      "start": 44,
       "length": 28
     }
   },
   {
+    "statement": "Trouvez la faute de syntaxe",
     "code": "func main() {\n  names := string[4]{\n      \"John\",\n      \"Paul\",\n      \"George\",\n      \"Ringo\",\n  }\n  fmt.Print(names)\n}",
-    "language": "html",
+    "language": "go",
     "range": {
       "start": 30,
       "length": 5
     }
   },
   {
-    "code": "Sur quels types de données pouvez-vous utiliser\n\"for -range\" ?\n\n- array, slice, map\n- slice, map, array, string, channel\n- slice, string, map, channel\n- slice, map, string",
+    "statement": "Sur quels types de données pouvez-vous utiliser \"for -range\" ?",
+    "code": "- array, slice, map\n- slice, map, array, string, channel\n- slice, string, map, channel\n- slice, map, string",
     "language": "go",
     "range": {
-      "start": 84,
+      "start": 20,
       "length": 36
     }
   },
   {
-    "code": "Quand la fonction init() sera-t-elle appelée ?\n\n- Après avoir importé un package avec une fonction init() définie\n- Seulement quand on l'appelle\n- Après la fonction main() dans le package principal",
-    "language": "html",
+    "statement": "Quand la fonction init() sera-t-elle appelée ?",
+    "code": "- Après avoir importé un package avec une fonction init() définie\n- Seulement quand on l'appelle\n- Après la fonction main() dans le package principal",
+    "language": "txt",
     "range": {
-      "start": 114,
+      "start": 66,
       "length": 30
+    }
+  },
+  {
+    "code": "int addOneTo(int value) {\n  // Quel retour de valeur est incorrect ?\n  return value++;\n  return ++value;\n  return value +1;\n}",
+    "language": "cpp",
+    "range": {
+      "start": 71,
+      "length": 15
     }
   }
 ]

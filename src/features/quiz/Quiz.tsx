@@ -20,11 +20,12 @@ export class Quiz extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       unOrderedList: [],
-      code: null,
-      langCode: null,
+      statement: undefined,
+      code: undefined,
+      langCode: undefined,
       index: props.startIndex ?? 0,
       isCorrect: false,
-      startDate: new Date()
+      startDate: new Date(),
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleIndexChange = this.handleIndexChange.bind(this);
@@ -68,14 +69,17 @@ export class Quiz extends React.Component<IProps, IState> {
 
   /**
    * Apply Google Code Prettify to code rendering.
+   * @param isApply Allow removing only.
    */
-  applyPrettify(): void {
-    // Remove prettyprinted class placed by Prettify from pre HTML element.
+  applyPrettify(isApply: boolean = true): void {
+    // Remove prettyprinted class placed by Prettify on pre HTML element.
     this.preElm?.current?.classList.remove("prettyprinted");
 
-    // Use window global variable to get PrettyPrint function.
-    const PR = (window as { [key: string]: any })["PR"] as any;
-    PR.prettyPrint();
+    if (isApply) {
+      // Use window global variable to get PrettyPrint function.
+      const PR = (window as { [key: string]: any })["PR"] as any;
+      PR.prettyPrint();
+    }
   }
 
   /**
@@ -127,6 +131,10 @@ export class Quiz extends React.Component<IProps, IState> {
         const newIndex: number = state.index + 1;
         return {
           index: newIndex,
+          statement:
+            newIndex < props.maxIndex
+              ? state.unOrderedList[newIndex].statement ?? undefined
+              : "",
           code:
             newIndex < props.maxIndex ? state.unOrderedList[newIndex].code : "",
           langCode:
@@ -139,7 +147,7 @@ export class Quiz extends React.Component<IProps, IState> {
         this.handleIndexChange();
         if (this.state.index < this.props.maxIndex) {
           this.applyAnswer();
-          this.applyPrettify();
+          this.applyPrettify(this.state.langCode !== "txt");
         }
         this.isClicked = false;
       }
@@ -184,8 +192,12 @@ export class Quiz extends React.Component<IProps, IState> {
    * Return the quiz current index.
    */
   handleIndexChange(): void {
-    const finalDate:ITimeDiff = getTimeDiff(this.state.startDate, new Date());
-    this.props.onIndexChange([this.state.index, this.state.isCorrect, finalDate]);
+    const finalDate: ITimeDiff = getTimeDiff(this.state.startDate, new Date());
+    this.props.onIndexChange([
+      this.state.index,
+      this.state.isCorrect,
+      finalDate,
+    ]);
   }
 
   componentDidMount(): void {
@@ -195,18 +207,19 @@ export class Quiz extends React.Component<IProps, IState> {
       () => {
         return {
           unOrderedList: unOrderedList,
+          statement: unOrderedList[this.state.index].statement ?? undefined,
           code: unOrderedList[this.state.index].code,
-          langCode: unOrderedList[this.state.index].language
+          langCode: unOrderedList[this.state.index].language,
         };
       },
       () => {
         this.applyAnswer();
-        this.applyPrettify();
+        this.applyPrettify(this.state.langCode !== "txt");
       }
     );
   }
 
-  componentDidUpdate(prevProps: IProps, prevState: IState): void {
+  componentDidUpdate(prevProps: IProps): void {
     // Change Quiz if countdown duration set 0 and ask for new index.
     if (
       this.props.changeIndex !== undefined &&
@@ -219,7 +232,17 @@ export class Quiz extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <pre ref={this.preElm} className={`prettyprint lang-${this.state.langCode}`}>
+      <pre
+        ref={this.preElm}
+        className={`prettyprint lang-${this.state.langCode}`}>
+        {this.state.statement && (
+          <div className={`${styles.statement} nocode`}>
+            <span>
+              {this.state.statement}
+            </span>
+            <br />
+          </div>
+        )}
         <code onClick={this.handleClick}>{this.state.code}</code>
       </pre>
     );

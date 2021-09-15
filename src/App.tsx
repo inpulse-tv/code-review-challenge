@@ -29,7 +29,7 @@ function App() {
 
   const countdownRef = useRef({} as Countdown);
 
-  const maxIndex: number = 3;
+  const maxIndex: number = 10;
 
   /**
    * Save user data in leaderboard.
