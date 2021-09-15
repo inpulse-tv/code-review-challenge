@@ -207,7 +207,7 @@
     }
   },
   {
-    "statement": "Sur quels types de données pouvez-vous utiliser \"for -range\" ?",
+    "statement": "En Go, sur quels types de données pouvez-vous utiliser \"for -range\" ?",
     "code": "- array, slice, map\n- slice, map, array, string, channel\n- slice, string, map, channel\n- slice, map, string",
     "language": "go",
     "range": {
@@ -230,6 +230,69 @@
     "range": {
       "start": 71,
       "length": 15
+    }
+  },
+  {
+    "statement": "Quel est le résultat de ce code ?",
+    "code": "fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']\nfruits.count('apple')\n\n- 1\n- Orange\n- Kiwi\n- 2",
+    "language": "py",
+    "range": {
+      "start": 117,
+      "length": 3
+    }
+  },
+  {
+    "statement": "Quel est le résultat de ce code ?",
+    "code": "fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']\nfruits.index('banana', 4)\n\n- 5\n- Banana\n- 6",
+    "language": "py",
+    "range": {
+      "start": 114,
+      "length": 3
+    }
+  },
+  {
+    "statement": "Quel est le résultat de ce code ?",
+    "code": "fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']\nfruits.index('banana', 1)\n\n- 3\n- Banana\n- 6",
+    "language": "py",
+    "range": {
+      "start": 101,
+      "length": 3
+    }
+  },
+  {
+    "statement": "Quel est le résultat de ce code ?",
+    "code": "stack = [3, 4, 5]\nstack.append(6)\nstack.pop()\n\n- 1\n- 6\n- [3, 4, 5, 6]",
+    "language": "py",
+    "range": {
+      "start": 51,
+      "length": 3
+    }
+  },
+  {
+    "statement": "Quel est le résultat de ce code ?",
+    "code": "from collections import deque\nqueue = deque([\"Eric\", \"John\", \"Michael\"])\nqueue.popleft()\n\n- John\n- Eric\n- 0",
+    "language": "py",
+    "range": {
+      "start": 97,
+      "length": 6
+    }
+  },
+  {
+    "statement": "Quel est le résultat de ce code ?",
+    "code": "squares = []\nfor x in range(10):\n  squares.append(x**2)\nsquares\n\n- [0, 1, 2, 3, 4, 8, 16, 32, 64, 81]\n- [0, 1, 4, 9, 18, 50, 36, 49, 64, 81]\n- [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]",
+    "language": "py",
+    "range": {
+      "start": 141,
+      "length": 38
+    }
+  },
+  {
+    "statement": "Quel est le résultat de ce code ?",
+    "code": "from math import pi\n[str(round(pi, i)) for i in range(1, 6)]\n\n- ['3.1', '3.14', '3.142', '3.1416', '3.14159']\n- ['3.1', '3.14', '3.100', '3.1400', '3.14000']\n- ['3.1', '3.14', '3.140', '3.1410', '3.14150']",
+    "language": "py",
+    "range": {
+      "start": 62,
+      "length": 47
     }
   }
 ]
