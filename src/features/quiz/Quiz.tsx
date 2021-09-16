@@ -101,34 +101,12 @@ export class Quiz extends React.Component<IProps, IState> {
   }
 
   /**
-   * Check answer and return result.
-   */
-  handleValidateClick(): void {
-    this.setState(() => {
-      return { isCorrect: true };
-    });
-  }
-
-  /**
-   * Apply result and select next code.
-   * @param e MouseEvent click.
-   */
-  handleClick(e: ReactMouseEvent): void {
-    e.preventDefault();
-    // Prevent multiple clicks.
-    if (this.isClicked) return;
-    this.isClicked = true;
-    // Add and render Ripple from answer.
-    this.addRippleClick(e, this.nextQuiz);
-  }
-
-  /**
    * Select next code on the list.
    */
-  nextQuiz(): void {
+  nextQuiz(isDebug: boolean = false): void {
     this.setState(
       (state, props) => {
-        const newIndex: number = state.index + 1;
+        const newIndex: number = isDebug ? state.index : state.index + 1;
         return {
           index: newIndex,
           statement:
@@ -189,6 +167,69 @@ export class Quiz extends React.Component<IProps, IState> {
   }
 
   /**
+   * Used to show answer position.
+   * For debug only.
+   * @param isChecked
+   */
+  showAnswer(isChecked: boolean): void {
+    if (process.env.NODE_ENV !== "production") {
+      if (this.preElm?.current) {
+        const currentElm: HTMLElement =
+          this.preElm.current.getElementsByTagName("code")[0];
+        const answer = currentElm.getElementsByClassName(styles.answer)[0];
+        answer.classList.toggle(styles.answer_show, isChecked);
+      }
+    }
+  }
+
+  /**
+   * Display a specif quiz from his Id.
+   * For debug only.
+   * @param id The quiz Id.
+   */
+  displayQuiz(id: number): void {
+    if (process.env.NODE_ENV !== "production") {
+      const results: ICode[] = this.props.datas.filter(
+        (code) => code.id === id
+      );
+      if (results.length > 0) {
+        // Apply specific quiz to current index.
+        const quiz: ICode = results[0];
+        let unOrderedList = [...this.state.unOrderedList];
+        unOrderedList[this.state.index] = {
+          ...unOrderedList[this.state.index],
+          ...quiz,
+        };
+        this.setState({ unOrderedList }, () => {
+          this.nextQuiz(true);
+        });
+      }
+    }
+  }
+
+  /**
+   * Check answer and return result.
+   */
+  handleValidateClick(): void {
+    this.setState(() => {
+      return { isCorrect: true };
+    });
+  }
+
+  /**
+   * Apply result and select next code.
+   * @param e MouseEvent click.
+   */
+  handleClick(e: ReactMouseEvent): void {
+    e.preventDefault();
+    // Prevent multiple clicks.
+    if (this.isClicked) return;
+    this.isClicked = true;
+    // Add and render Ripple from answer.
+    this.addRippleClick(e, this.nextQuiz);
+  }
+
+  /**
    * Return the quiz current index.
    */
   handleIndexChange(): void {
@@ -237,9 +278,7 @@ export class Quiz extends React.Component<IProps, IState> {
         className={`prettyprint lang-${this.state.langCode}`}>
         {this.state.statement && (
           <div className={`${styles.statement} nocode`}>
-            <span>
-              {this.state.statement}
-            </span>
+            <span>{this.state.statement}</span>
             <br />
           </div>
         )}

@@ -20,6 +20,45 @@ h1 {
   margin: 1.8vw;
 }
 
+.debug {
+  font-size: 0.5em;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+
+  input[type="text"] {
+    font-size: 0.8em;
+    width: 3em;
+    height: 1.4em;
+  }
+
+  input[type="checkbox"] {
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  button {
+    margin-left: 0.5em;
+    padding: 0.3em;
+  }
+
+  dl {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    dt {
+      font-weight: bold;
+      padding-right: 0.2em;
+      &::after {
+        padding-left: 0.2em;
+        content: ":";
+      }
+    }
+  }
+}
+
 .start-countdown {
   font-family: "Nintendoid1";
   text-shadow: $text-shadow;

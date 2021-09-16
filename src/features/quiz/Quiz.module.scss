@@ -34,7 +34,13 @@ span.ripple {
 
 span.answer {
   /* for debug only */
-  font-weight: bold;
+  &_show {
+    font-weight: bold;
+    color: chartreuse;
+    span {
+      color: chartreuse;
+    }
+  }
 }
 
 div.statement {

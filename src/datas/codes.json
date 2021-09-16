@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "statement": "Trouvez la faute de syntaxe",
     "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date, parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
     "language": "py",
@@ -9,6 +10,7 @@
     }
   },
   {
+    "id": 2,
     "statement": "Trouvez la faute de syntaxe",
     "code": "numpy as np\nB = np.ones((3,2))\nprint(B)\nB.shape\nB.sum()",
     "language": "py",
@@ -18,6 +20,7 @@
     }
   },
   {
+    "id": 3,
     "statement": "Trouvez la faute de syntaxe",
     "code": "def mafonction(a,b,c):\n    resultat = a+b*b+c\n    rturn resultat",
     "language": "py",
@@ -27,6 +30,7 @@
     }
   },
   {
+    "id": 4,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT pub_id, GROUP_CONCAT(DISTINCT cate_id)\nFROM book_mast\nGROUP BY pub_id\nORDER BY GROUP_CONCAT(DISTINCT cate) ASC;",
     "language": "sql",
@@ -36,6 +40,7 @@
     }
   },
   {
+    "id": 5,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT pub_id, GROUP_CONCAT(DISTINCT cate_id)\nFROM book_mast\nGROUP pub_id;",
     "language": "sql",
@@ -45,6 +50,7 @@
     }
   },
   {
+    "id": 6,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT student.first_name, student.last_name, AVG(mark) avg_mark \nFROM subject\nJOIN student on student.ID = subject.stud_id\nJOIN marks on marks.id = subject.mark_id\nGROUP BY student.first, student.last\nHAVING AVG(mar) > 9;",
     "language": "sql",
@@ -54,6 +60,7 @@
     }
   },
   {
+    "id": 7,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT SUM(total_cost)\nFROM purchase\nWHERE cate_id = CA2019;",
     "language": "sql",
@@ -63,6 +70,7 @@
     }
   },
   {
+    "id": 8,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT cate_id,\nSUM(receive_qty*purch_price)\nFOR purchase\nGROUP BY cate_id;",
     "language": "sql",
@@ -72,6 +80,7 @@
     }
   },
   {
+    "id": 9,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT SUM(mysum)\nFROM(\nSELECT COUNT(*) :: mysum\nFROM book_mast\nWHERE no_page>200) AS bb;",
     "language": "sql",
@@ -81,6 +90,7 @@
     }
   },
   {
+    "id": 10,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT L.NomLog, L.PrixLog FROM Logiciel L INNER JOIN Projet P\nON L.NumProj=P.NumProj WHERE P.TitreProj 'gestion de stock'\nORDER BY L.PrixLog DESC;",
     "language": "sql",
@@ -90,6 +100,7 @@
     }
   },
   {
+    "id": 11,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT NumProj, TitreProj FROM Projet P\nINNER JOIN Realisation R ON P.NumProj=R.NumProj\nGROUP BY NumProj TitreProj\nHAVING count(*)=(SELECT COUNT(*) FROM Developpeur);",
     "language": "sql",
@@ -99,6 +110,7 @@
     }
   },
   {
+    "id": 12,
     "statement": "Trouvez la faute de syntaxe",
     "code": "SELECT COUNT(*) FROM ENSEIGNANT E\nINNER JOIN MATIERE M ON M.CodeMat=E.CodeMat \nWHERE M NomMat='Informatique';",
     "language": "sql",
@@ -108,6 +120,7 @@
     }
   },
   {
+    "id": 13,
     "statement": "Quelle condition est exécutée ?",
     "code": "#!/bin/bash\nn=10\nif [ $n -lt 10 ];\nthen\necho \"Click here if this is executed\"\nelse\necho \"Click here if this is executed\"\nfi",
     "language": "bash",
@@ -117,6 +130,7 @@
     }
   },
   {
+    "id": 14,
     "statement": "Trouvez la faute de syntaxe",
     "code": "x = 67;\ny = 33;\n\ny *= 2;\ny++;\n\nif ( x = y ) {\n  cout << \"X and Y are equal\";\n} else {\n  cout << \"X and Y are not equal\";\n}",
     "language": "cpp",
@@ -126,6 +140,7 @@
     }
   },
   {
+    "id": 15,
     "statement": "Qu'elle est la valeur de sortie ?",
     "code": "y = 33;\ny <<= 1;\ncout << y;\n\n33\n34\n16\n66\nfalse",
     "language": "cpp",
@@ -135,6 +150,7 @@
     }
   },
   {
+    "id": 16,
     "statement": "Trouvez la faute de syntaxe",
     "code": "<html>\n  <body>\n    <p><a link=\"https://inpulse.tv\">link</a></p>\n  </body>\n</html>",
     "language": "html",
@@ -144,15 +160,17 @@
     }
   },
   {
+    "id": 17,
     "statement": "Cliquez sur la vraie déclaration",
     "code": "( x/4 == x>>2 )\n( x*4 == x<<2 )\n( x*4 == x>>2 )\n( x/4 == x<<2 )",
     "language": "cpp",
     "range": {
-      "start": 19,
+      "start": 21,
       "length": 22
     }
   },
   {
+    "id": 18,
     "statement": "Trouvez la faute de syntaxe",
     "code": "<html onload=\"alert('html is loaded')\">\n  <body onload=\"alert('body is loaded')\">\n    <p>lorem ipsum</p>\n  </body>\n</html>>",
     "language": "html",
@@ -162,6 +180,7 @@
     }
   },
   {
+    "id": 19,
     "statement": "Go est un language de progammation qui est ...",
     "code": "- compilé\n- interprété\n- typé dynamiquement",
     "language": "txt",
@@ -171,15 +190,17 @@
     }
   },
   {
+    "id": 20,
     "statement": "Quelle réponse est syntaxiquement correcte ?",
     "code": "- var int a\n- var a, b, java bool\n- var := 3",
     "language": "go",
     "range": {
       "start": 11,
-      "length": 21
+      "length": 22
     }
   },
   {
+    "id": 21,
     "statement": "Trouvez la faute de syntaxe",
     "code": "package main\nimport \"fmt\"\n\nfunc main() {\n  var i int\n  var f float64\n  var b boolean\n  var s string\n  fmt.Printf(\"%v %v %v %q\\n\", i, f, b, s)\n}",
     "language": "go",
@@ -189,6 +210,7 @@
     }
   },
   {
+    "id": 22,
     "statement": "Comment convertir a := 3 en Go ?",
     "code": "- float64(a)\n- var a float64 = float64(a)\n- var b float64 = float64(a)",
     "language": "go",
@@ -198,6 +220,7 @@
     }
   },
   {
+    "id": 23,
     "statement": "Trouvez la faute de syntaxe",
     "code": "func main() {\n  names := string[4]{\n      \"John\",\n      \"Paul\",\n      \"George\",\n      \"Ringo\",\n  }\n  fmt.Print(names)\n}",
     "language": "go",
@@ -207,6 +230,7 @@
     }
   },
   {
+    "id": 24,
     "statement": "En Go, sur quels types de données pouvez-vous utiliser \"for -range\" ?",
     "code": "- array, slice, map\n- slice, map, array, string, channel\n- slice, string, map, channel\n- slice, map, string",
     "language": "go",
@@ -216,6 +240,7 @@
     }
   },
   {
+    "id": 25,
     "statement": "Quand la fonction init() sera-t-elle appelée ?",
     "code": "- Après avoir importé un package avec une fonction init() définie\n- Seulement quand on l'appelle\n- Après la fonction main() dans le package principal",
     "language": "txt",
@@ -225,6 +250,7 @@
     }
   },
   {
+    "id": 26,
     "code": "int addOneTo(int value) {\n  // Quel retour de valeur est incorrect ?\n  return value++;\n  return ++value;\n  return value +1;\n}",
     "language": "cpp",
     "range": {
@@ -233,6 +259,7 @@
     }
   },
   {
+    "id": 27,
     "statement": "Quel est le résultat de ce code ?",
     "code": "fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']\nfruits.count('apple')\n\n- 1\n- Orange\n- Kiwi\n- 2",
     "language": "py",
@@ -242,6 +269,7 @@
     }
   },
   {
+    "id": 28,
     "statement": "Quel est le résultat de ce code ?",
     "code": "fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']\nfruits.index('banana', 4)\n\n- 5\n- Banana\n- 6",
     "language": "py",
@@ -251,6 +279,7 @@
     }
   },
   {
+    "id": 29,
     "statement": "Quel est le résultat de ce code ?",
     "code": "fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']\nfruits.index('banana', 1)\n\n- 3\n- Banana\n- 6",
     "language": "py",
@@ -260,6 +289,7 @@
     }
   },
   {
+    "id": 30,
     "statement": "Quel est le résultat de ce code ?",
     "code": "stack = [3, 4, 5]\nstack.append(6)\nstack.pop()\n\n- 1\n- 6\n- [3, 4, 5, 6]",
     "language": "py",
@@ -269,6 +299,7 @@
     }
   },
   {
+    "id": 31,
     "statement": "Quel est le résultat de ce code ?",
     "code": "from collections import deque\nqueue = deque([\"Eric\", \"John\", \"Michael\"])\nqueue.popleft()\n\n- John\n- Eric\n- 0",
     "language": "py",
@@ -278,6 +309,7 @@
     }
   },
   {
+    "id": 32,
     "statement": "Quel est le résultat de ce code ?",
     "code": "squares = []\nfor x in range(10):\n  squares.append(x**2)\nsquares\n\n- [0, 1, 2, 3, 4, 8, 16, 32, 64, 81]\n- [0, 1, 4, 9, 18, 50, 36, 49, 64, 81]\n- [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]",
     "language": "py",
@@ -287,6 +319,7 @@
     }
   },
   {
+    "id": 33,
     "statement": "Quel est le résultat de ce code ?",
     "code": "from math import pi\n[str(round(pi, i)) for i in range(1, 6)]\n\n- ['3.1', '3.14', '3.142', '3.1416', '3.14159']\n- ['3.1', '3.14', '3.100', '3.1400', '3.14000']\n- ['3.1', '3.14', '3.140', '3.1410', '3.14150']",
     "language": "py",

@@ -5,29 +5,29 @@ import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
 
 import "./App.scss";
 import { ITimeDiff } from "./utils/timeDiff";
-import { Leaderboard } from "./features/leaderboard/leaderboard";
-import quizDatas from "./datas/codes.json";
+import { Leaderboard } from "./features/leaderboard/Leaderboard";
+import quizData from "./datas/codes.json";
 import RegisterFormular from "./features/forms/Register";
 import { IValues as RegistrationValues } from "./features/forms/IValues";
 import { ILeaderboard } from "./datas/ILeaderboard";
-import LeaderboardService from "./features/leaderboard/leaderboard.service";
+import LeaderboardService from "./features/leaderboard/Leaderboard.Service";
 import useStateCallback from "./hooks/StateCallback";
+import Display from "./features/Display";
+import Debug from "./features/debug/Debug";
 
 function App() {
   const lbService = new LeaderboardService();
 
-  const [showLeaderboard, setShowLeaderboard] = useState(true);
-  const [showRegistration, setShowRegistration] = useState(false);
-  const [showStartCountdown, setShowStartCountdown] = useState(false);
-  const [showQuiz, setShowQuiz] = useState(false);
-  const [showResult, setShowResult] = useState(false);
+  const [displayScreen, setDisplayScreen] = useState(1);
   const [changeIndex, setChangeIndex] = useState(false);
   const [points, setPoints] = useState(0);
   const [time, setTime] = useState({} as ITimeDiff);
   const [leaderboardData, setLeaderboardData] = useState(lbService.load());
   const [userData, setUserData] = useStateCallback(lbService.userInit);
+  const [showDebug] = useState(process.env.NODE_ENV !== "production");
 
   const countdownRef = useRef({} as Countdown);
+  const quizRef = useRef({} as Quiz);
 
   const maxIndex: number = 10;
 
@@ -43,25 +43,22 @@ function App() {
    * Handle click event on leaderboard.
    */
   const handleLeaderboardClick = () => {
-    setShowLeaderboard(false);
-    setShowRegistration(true);
+    setDisplayScreen(Display.Registration);
   };
 
   /**
    * Handle registration submit event.
    */
   const handleRegistrationSubmit = (values: RegistrationValues) => {
-    setShowRegistration(false);
     setUserData(Object.assign({}, userData, values));
-    setShowStartCountdown(true);
+    setDisplayScreen(Display.Countdown);
   };
 
   /**
    * handle escape key press event from registration formular.
    */
   const handleEscapeKeyPress = () => {
-    setShowLeaderboard(true);
-    setShowRegistration(false);
+    setDisplayScreen(Display.Leaderboard);
   };
 
   /**
@@ -70,8 +67,7 @@ function App() {
    */
   const handleCountdownTimeChange = (time: number) => {
     if (time < 0) {
-      setShowStartCountdown(false);
-      setShowQuiz(true);
+      setDisplayScreen(Display.Quiz);
     }
   };
 
@@ -112,8 +108,7 @@ function App() {
       );
 
       // Show result.
-      setShowQuiz(false);
-      setShowResult(true);
+      setDisplayScreen(Display.Result);
     }
   };
 
@@ -147,16 +142,40 @@ function App() {
    * Handle click on user result display.
    */
   const handleEndClick = (): void => {
-    setShowResult(false);
     // Reset score and data.
     setPoints(0);
     setUserData(lbService.userInit);
-    setShowLeaderboard(true);
+    setDisplayScreen(Display.Leaderboard);
   };
+
+  /**
+   * Display a tile element.
+   * @returns a tilte component.
+   */
+  const Title = (): JSX.Element => {
+    return <h1>inpulse Code Review Challenge</h1>;
+  };
+
+  /**
+   * Display a debug tool bar element.
+   */
+  let DebugToolBar: any;
+  if (process.env.NODE_ENV !== "production") {
+    DebugToolBar = Debug;
+  } else {
+    DebugToolBar = () => null;
+  }
 
   return (
     <div className="App">
-      {showLeaderboard && (
+      {showDebug && (
+        <DebugToolBar
+          quizData={quizData}
+          display={displayScreen}
+          quizRef={quizRef}
+        />
+      )}
+      {displayScreen === Display.Leaderboard && (
         <div onClick={handleLeaderboardClick} className="leaderboard">
           <Title />
           <Leaderboard
@@ -172,20 +191,20 @@ function App() {
           <p className="start-text">Appuyez sur l'ecran pour demarrer le jeu</p>
         </div>
       )}
-      {showRegistration && (
+      {displayScreen === Display.Registration && (
         <RegisterFormular
           onSubmit={handleRegistrationSubmit}
           onEscapePress={handleEscapeKeyPress}
         />
       )}
-      {showStartCountdown && (
+      {displayScreen === Display.Countdown && (
         <StartCountdown
           className="start-countdown"
           onTimeChange={handleCountdownTimeChange}
           endText="START !"
         />
       )}
-      {showQuiz && (
+      {displayScreen === Display.Quiz && (
         <div>
           <Countdown
             date={Date.now() + 59000}
@@ -195,15 +214,16 @@ function App() {
             ref={countdownRef}
           />
           <Quiz
-            datas={quizDatas}
+            datas={quizData}
             onIndexChange={handleIndexChange}
             maxIndex={maxIndex}
             startIndex={0}
             changeIndex={changeIndex}
+            ref={quizRef}
           />
         </div>
       )}
-      {showResult && (
+      {displayScreen === Display.Result && (
         <div className="results" onClick={handleEndClick}>
           <h1>Votre score</h1>
           <p>
@@ -233,9 +253,5 @@ function App() {
     </div>
   );
 }
-
-const Title = (): JSX.Element => {
-  return <h1>inpulse Code Review Challenge</h1>;
-};
 
 export default App;
