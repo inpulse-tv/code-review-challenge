@@ -47,7 +47,7 @@ span.answer {
 
 div.statement {
   margin-bottom: 0.5em;
-  white-space: normal;
+  white-space: pre-wrap;
   font-weight: bold;
   color: $statement_color;
 }

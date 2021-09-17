@@ -38,6 +38,10 @@ const Debug = (props: IProps) => {
       props.quizRef.current.showAnswer(ev.currentTarget.checked);
   };
 
+  /**
+   * Change the display screen status.
+   * @param ev the event change.
+   */
   const handleDisplayChange = (
     ev: react.ChangeEvent<HTMLSelectElement>
   ): void => {

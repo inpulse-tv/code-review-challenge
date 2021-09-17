@@ -537,13 +537,33 @@
   },
   {
     "id": 54,
-    "statement": "Dans une classe, une propriété static ...",
-    "code": "- Ne peut être hérité.\n- Est constant.\n- Possède la même valeur pour toutes les instances de la classe.\n- Ne peut être accédé depuis une autre classe.",
+    "statement": "Dans une classe, une propriété \"static\" ...",
+    "code": "- Ne peut être héritée.\n- Est constante.\n- Possède la même valeur pour toutes les instances de la classe.\n- Ne peut être accédée depuis une autre classe.",
     "language": "cs",
     "nocode": true,
     "range": {
-      "start": 39,
+      "start": 41,
       "length": 64
+    }
+  },
+  {
+    "id": 55,
+    "statement": "Quelle est la valeur par défaut de la propriété \"position\" ?",
+    "code": "- fixed\n- relative\n- absolute\n- static",
+    "language": "css",
+    "range": {
+      "start": 30,
+      "length": 8
+    }
+  },
+  {
+    "id": 56,
+    "statement": "Comment rédigez vous la bordure ci-après:\nTop border = 8 pixels\nBottom border = 3 pixels\nLeft border = 12 pixels\nRight border = 1 pixel",
+    "code": "- border-width:8px 12px 5px 1px;\n- border-width:8px 1px 3px 12px;\n- border-width:3px 12px 8px 1px;\n- border-width:8px 3px 12px 1px;",
+    "language": "css",
+    "range": {
+      "start": 33,
+      "length": 32
     }
   }
 ]
