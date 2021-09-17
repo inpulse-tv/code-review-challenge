@@ -2,10 +2,10 @@
   {
     "id": 1,
     "statement": "Trouvez la faute de syntaxe",
-    "code": "ethereum = pd.read_csv('ETH-EUR.csv',index_col = Date, parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how= 'inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
+    "code": "ethereum = pd.read_csv('ETH-EUR.csv', index_col = Date, parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how='inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
     "language": "py",
     "range": {
-      "start": 49,
+      "start": 50,
       "length": 4
     }
   },
@@ -183,7 +183,7 @@
     "id": 19,
     "statement": "Go est un language de progammation qui est ...",
     "code": "- compilé\n- interprété\n- typé dynamiquement",
-    "language": "txt",
+    "language": "go",
     "range": {
       "start": 0,
       "length": 9
@@ -243,7 +243,7 @@
     "id": 25,
     "statement": "Quand la fonction init() sera-t-elle appelée ?",
     "code": "- Après avoir importé un package avec une fonction init() définie\n- Seulement quand on l'appelle\n- Après la fonction main() dans le package principal",
-    "language": "txt",
+    "language": "go",
     "range": {
       "start": 66,
       "length": 30
@@ -290,7 +290,7 @@
   },
   {
     "id": 30,
-    "statement": "Quel est le résultat de ce code ?",
+    "statement": "Quelle sera la valeur de sortie du code suivant :",
     "code": "stack = [3, 4, 5]\nstack.append(6)\nstack.pop()\n\n- 1\n- 6\n- [3, 4, 5, 6]",
     "language": "py",
     "range": {
@@ -326,6 +326,136 @@
     "range": {
       "start": 62,
       "length": 47
+    }
+  },
+  {
+    "id": 34,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "float circonference ( float diameter ) {\n  int pi = 3.1415926;\n  return diameter * pi;\n}",
+    "language": "cpp",
+    "range": {
+      "start": 42,
+      "length": 5
+    }
+  },
+  {
+    "id": 35,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "float circonference ( float diameter ) {\n  float pi = 3.1415926   \n  return diameter * pi;\n}",
+    "language": "cpp",
+    "range": {
+      "start": 60,
+      "length": 6
+    }
+  },
+  {
+    "id": 36,
+    "statement": "Quel est le résultat de sortie dans la console ?",
+    "code": "console.log(\"1\");\nsetTimeout(() => console.log(\"2\"), 0);\nsetTimeout(() => console.log(\"3\"), 100);\nconsole.log(\"4\");\n\n- 1 2 3 4\n- 1 2 4 3\n- 1 4 2 3",
+    "language": "js",
+    "range": {
+      "start": 142,
+      "length": 11
+    }
+  },
+  {
+    "id": 37,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "input[type=\"text\"] {\n  font-size: 0.8em;\n  font-weight: bold;\n  font-color: black;\n}",
+    "language": "css",
+    "range": {
+      "start": 64,
+      "length": 10
+    }
+  },
+  {
+    "id": 38,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "const element = {\n  type: 'h1',\n  props: {\n    className: 'greeting'   \n    children: 'Hello world !'\n  }\n};",
+    "language": "js",
+    "range": {
+      "start": 64,
+      "length": 7
+    }
+  },
+  {
+    "id": 39,
+    "statement": "Quelle liste de mots clés corresponds au langage Java ?",
+    "code": "- static, super, const, void\n- private, void, float, final\n- async, bool, using, const",
+    "language": "java",
+    "range": {
+      "start": 29,
+      "length": 29
+    }
+  },
+  {
+    "id": 40,
+    "statement": "Quelle liste de mots clés corresponds au langage C# ?",
+    "code": "- static, super, const, void\n- private, void, float, final\n- async, bool, using, const",
+    "language": "cs",
+    "range": {
+      "start": 59,
+      "length": 27
+    }
+  },
+  {
+    "id": 41,
+    "statement": "Quelle liste de mots clés corresponds au langage TypeScript ?",
+    "code": "- static, super, const, void\n- private, void, float, final\n- async, bool, using, const",
+    "language": "js",
+    "range": {
+      "start": 0,
+      "length": 28
+    }
+  },
+  {
+    "id": 42,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];\nlet odds = numbers.map(item => item % 2 > 0);",
+    "language": "js",
+    "range": {
+      "start": 66,
+      "length": 5
+    }
+  },
+  {
+    "id": 43,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "git init -b main\ngit add .\ngit push -m \"First commit\"",
+    "language": "bash",
+    "range": {
+      "start": 31,
+      "length": 4
+    }
+  },
+  {
+    "id": 44,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "async function asyncCall() {\n  const result = waiting getData();\n  console.log(result);\n}\n\nasyncCall();",
+    "language": "js",
+    "range": {
+      "start": 46,
+      "length": 7
+    }
+  },
+  {
+    "id": 45,
+    "statement": "Quel est le résultat de sortie ?",
+    "code": "let fruits = ['orange', 'apple', 'pear', 'banana'];\nlet copy = [...fruits];\nfruits.push('kiwi');\ncopy.shift();\nconsole.log(copy);\n\n- [ 'orange', 'apple', 'pear', 'banana', 'kiwi' ]\n- [ 'apple', 'pear', 'banana' ]\n- [ 'apple', 'pear', 'banana', 'kiwi' ]",
+    "language": "js",
+    "range": {
+      "start": 181,
+      "length": 31
+    }
+  },
+  {
+    "id": 46,
+    "statement": "Quel est le résultat de sortie ?",
+    "code": "let fruits = [{fruit:'orange', nb: 5}, {fruit:'apple', nb: 2}, {fruit:'banana', nb: 4}];\nfunction maFonction(x) {\n  console.log(x.length);\n}\nmaFonction(...fruits);\n\n- 0\n- undefined\n- 3",
+    "language": "js",
+    "range": {
+      "start": 169,
+      "length": 11
     }
   }
 ]

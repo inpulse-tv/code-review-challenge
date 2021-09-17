@@ -4,6 +4,7 @@ import { IProps } from "./IProps";
 import { IState } from "./IState";
 import { ICode } from "../../datas/ICode";
 import { getTimeDiff, ITimeDiff } from "../../utils/timeDiff";
+import { getLanguage } from "../Language";
 
 /**
  * Quiz component.
@@ -30,7 +31,7 @@ export class Quiz extends React.Component<IProps, IState> {
     this.handleClick = this.handleClick.bind(this);
     this.handleIndexChange = this.handleIndexChange.bind(this);
     this.handleValidateClick = this.handleValidateClick.bind(this);
-    this.nextQuiz = this.nextQuiz.bind(this);
+    this.getQuiz = this.getQuiz.bind(this);
     this.preElm = React.createRef();
   }
 
@@ -101,12 +102,13 @@ export class Quiz extends React.Component<IProps, IState> {
   }
 
   /**
-   * Select next code on the list.
+   * Select next quiz on the list.
+   * @param isCurrentIndex don't change current index.
    */
-  nextQuiz(isDebug: boolean = false): void {
+  getQuiz(isCurrentIndex: boolean = false): void {
     this.setState(
       (state, props) => {
-        const newIndex: number = isDebug ? state.index : state.index + 1;
+        const newIndex: number = isCurrentIndex ? state.index : state.index + 1;
         return {
           index: newIndex,
           statement:
@@ -201,7 +203,7 @@ export class Quiz extends React.Component<IProps, IState> {
           ...quiz,
         };
         this.setState({ unOrderedList }, () => {
-          this.nextQuiz(true);
+          this.getQuiz(true);
         });
       }
     }
@@ -226,7 +228,7 @@ export class Quiz extends React.Component<IProps, IState> {
     if (this.isClicked) return;
     this.isClicked = true;
     // Add and render Ripple from answer.
-    this.addRippleClick(e, this.nextQuiz);
+    this.addRippleClick(e, this.getQuiz);
   }
 
   /**
@@ -237,25 +239,22 @@ export class Quiz extends React.Component<IProps, IState> {
     this.props.onIndexChange([
       this.state.index,
       this.state.isCorrect,
+      getLanguage(this.state.unOrderedList[this.state.index].language),
       finalDate,
     ]);
   }
 
+  /**
+   * Init quiz list.
+   */
   componentDidMount(): void {
-    // Get Quiz.
-    const unOrderedList: Array<ICode> = this.getUnOrderedCodes();
     this.setState(
-      () => {
-        return {
-          unOrderedList: unOrderedList,
-          statement: unOrderedList[this.state.index].statement ?? undefined,
-          code: unOrderedList[this.state.index].code,
-          langCode: unOrderedList[this.state.index].language,
-        };
+      {
+        unOrderedList: this.getUnOrderedCodes(),
       },
       () => {
-        this.applyAnswer();
-        this.applyPrettify(this.state.langCode !== "txt");
+        // Get Quiz.
+        this.getQuiz(true);
       }
     );
   }
@@ -267,7 +266,7 @@ export class Quiz extends React.Component<IProps, IState> {
       prevProps.changeIndex !== this.props.changeIndex &&
       this.props.changeIndex
     ) {
-      this.nextQuiz();
+      this.getQuiz();
     }
   }
 

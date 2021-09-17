@@ -7,5 +7,5 @@ export interface IProps {
   maxIndex: number;
   startIndex?: number;
   changeIndex?: boolean;
-  onIndexChange: (values: [number, boolean, ITimeDiff]) => {} | void;
+  onIndexChange: (values: [number, boolean, string, ITimeDiff]) => {} | void;
 }

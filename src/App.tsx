@@ -22,6 +22,7 @@ function App() {
   const [changeIndex, setChangeIndex] = useState(false);
   const [points, setPoints] = useState(0);
   const [time, setTime] = useState({} as ITimeDiff);
+  const [language, setLanguage] = useState<string>();
   const [leaderboardData, setLeaderboardData] = useState(lbService.load());
   const [userData, setUserData] = useStateCallback(lbService.userInit);
   const [showDebug] = useState(process.env.NODE_ENV !== "production");
@@ -76,13 +77,16 @@ function App() {
    * and redirection to score result.
    * @param index Current index.
    */
-  const handleIndexChange = (values: [number, boolean, ITimeDiff]) => {
-    const [index, isCorrect, finalDate] = values;
+  const handleIndexChange = (values: [number, boolean, string, ITimeDiff]) => {
+    const [index, isCorrect, language, finalDate] = values;
     const currentScore: number = isCorrect ? points + 1 : points;
 
     // Update user score.
     if (isCorrect) setPoints(currentScore);
     setTime(finalDate);
+
+    // Set quiz language.
+    setLanguage(language);
 
     // Reset index change.
     setChangeIndex(false);
@@ -206,13 +210,16 @@ function App() {
       )}
       {displayScreen === Display.Quiz && (
         <div>
-          <Countdown
-            date={Date.now() + 59000}
-            renderer={countdownRenderer}
-            onComplete={handleCountdownComplete}
-            onStop={handleCountdownStop}
-            ref={countdownRef}
-          />
+          <div className="quiz-toolbar">
+            {language && (`${language} / `)}
+            <Countdown
+              date={Date.now() + 59000}
+              renderer={countdownRenderer}
+              onComplete={handleCountdownComplete}
+              onStop={handleCountdownStop}
+              ref={countdownRef}
+            />
+          </div>
           <Quiz
             datas={quizData}
             onIndexChange={handleIndexChange}

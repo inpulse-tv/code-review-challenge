@@ -4,6 +4,8 @@
 $ripple_duration: 600;
 $good_answer_color: rgba(18, 236, 84, 0.7);
 $bad_answer_color: rgba(236, 62, 18, 0.7);
+$debug_color: $good_answer_color;
+$statement_color: aqua;
 
 :export {
   rippleDuration: $ripple_duration;
@@ -36,9 +38,9 @@ span.answer {
   /* for debug only */
   &_show {
     font-weight: bold;
-    color: chartreuse;
+    color: $debug_color;
     span {
-      color: chartreuse;
+      color: $debug_color;
     }
   }
 }
@@ -46,6 +48,8 @@ span.answer {
 div.statement {
   margin-bottom: 0.5em;
   white-space: normal;
+  font-weight: bold;
+  color: $statement_color;
 }
 
 @keyframes ripple {
