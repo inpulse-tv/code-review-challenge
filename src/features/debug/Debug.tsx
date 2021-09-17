@@ -11,6 +11,7 @@ import { IProps } from "./IProps";
  */
 const Debug = (props: IProps) => {
   const inputIdRef = useRef<HTMLInputElement>(null);
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
   /**
    * Redirect to the specified quiz ID.
@@ -21,6 +22,7 @@ const Debug = (props: IProps) => {
   ): void => {
     if (props.display === Display.Quiz && inputIdRef.current) {
       const id = parseInt(inputIdRef.current.value);
+      if (checkboxRef.current) checkboxRef.current.checked = false;
       props.quizRef.current.displayQuiz(id);
     }
   };
@@ -55,7 +57,7 @@ const Debug = (props: IProps) => {
         <dt>Show answer</dt>
         <dd>
           <input
-            type="checkbox"
+            type="checkbox" ref={checkboxRef}
             onChange={(ev) => handleShowAnswerChange(ev)}></input>
         </dd>
       </dl>

@@ -5,6 +5,7 @@ export interface IState {
   statement?: string;
   code?: string;
   langCode?: string;
+  noCode: boolean;
   index: number;
   isCorrect: boolean;
   startDate: Date;

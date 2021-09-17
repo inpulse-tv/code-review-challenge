@@ -184,6 +184,7 @@
     "statement": "Go est un language de progammation qui est ...",
     "code": "- compilé\n- interprété\n- typé dynamiquement",
     "language": "go",
+    "nocode": true,
     "range": {
       "start": 0,
       "length": 9
@@ -234,6 +235,7 @@
     "statement": "En Go, sur quels types de données pouvez-vous utiliser \"for -range\" ?",
     "code": "- array, slice, map\n- slice, map, array, string, channel\n- slice, string, map, channel\n- slice, map, string",
     "language": "go",
+    "nocode": true,
     "range": {
       "start": 20,
       "length": 36
@@ -244,6 +246,7 @@
     "statement": "Quand la fonction init() sera-t-elle appelée ?",
     "code": "- Après avoir importé un package avec une fonction init() définie\n- Seulement quand on l'appelle\n- Après la fonction main() dans le package principal",
     "language": "go",
+    "nocode": true,
     "range": {
       "start": 66,
       "length": 30
@@ -383,6 +386,7 @@
     "statement": "Quelle liste de mots clés corresponds au langage Java ?",
     "code": "- static, super, const, void\n- private, void, float, final\n- async, bool, using, const",
     "language": "java",
+    "nocode": true,
     "range": {
       "start": 29,
       "length": 29
@@ -393,6 +397,7 @@
     "statement": "Quelle liste de mots clés corresponds au langage C# ?",
     "code": "- static, super, const, void\n- private, void, float, final\n- async, bool, using, const",
     "language": "cs",
+    "nocode": true,
     "range": {
       "start": 59,
       "length": 27
@@ -403,6 +408,7 @@
     "statement": "Quelle liste de mots clés corresponds au langage TypeScript ?",
     "code": "- static, super, const, void\n- private, void, float, final\n- async, bool, using, const",
     "language": "js",
+    "nocode": true,
     "range": {
       "start": 0,
       "length": 28
@@ -456,6 +462,47 @@
     "range": {
       "start": 169,
       "length": 11
+    }
+  },
+  {
+    "id": 47,
+    "statement": "Quel est le résultat de sortie ?",
+    "code": "let fruits = [{fruit:'orange', nb: 5}, {fruit:'apple', nb: 2}, {fruit:'banana', nb: 4}];\nfunction maFonction(x) {\n  console.log(x.length);\n}\nmaFonction([...fruits]);\n\n- 0\n- undefined\n- 3",
+    "language": "js",
+    "range": {
+      "start": 183,
+      "length": 3
+    }
+  },
+  {
+    "id": 48,
+    "statement": "Quelle réponse n'est pas valable pour remplacer X dans le code ci-dessous :",
+    "code": "X fruits = new List();\nfruits.add(\"Apple\");\n\n- var\n- let\n- List<String>",
+    "language": "cs",
+    "range": {
+      "start": 51,
+      "length": 5
+    }
+  },
+  {
+    "id": 49,
+    "statement": "Quelle réponse n'est pas valable pour remplacer X dans le code ci-dessous :",
+    "code": "X fruits = new List();\nfruits.add(\"Apple\");\n\n- var\n- let\n- List<String>",
+    "language": "cs",
+    "range": {
+      "start": 51,
+      "length": 5
+    }
+  },
+  {
+    "id": 50,
+    "statement": "Qu'est-ce qu'une IIFE ?",
+    "code": "- Une fonction asynchrone.\n- Une fonction exécutée dès qu'elle est définie.\n- Une fonction non protégée des variables globales.",
+    "language": "js",
+    "nocode": true,
+    "range": {
+      "start": 27,
+      "length": 48
     }
   }
 ]

@@ -24,6 +24,7 @@ export class Quiz extends React.Component<IProps, IState> {
       statement: undefined,
       code: undefined,
       langCode: undefined,
+      noCode: false,
       index: props.startIndex ?? 0,
       isCorrect: false,
       startDate: new Date(),
@@ -121,13 +122,17 @@ export class Quiz extends React.Component<IProps, IState> {
             newIndex < props.maxIndex
               ? state.unOrderedList[newIndex].language
               : "",
+          noCode:
+            newIndex < props.maxIndex
+              ? state.unOrderedList[newIndex].nocode ?? false
+              : false,
         };
       },
       () => {
         this.handleIndexChange();
         if (this.state.index < this.props.maxIndex) {
           this.applyAnswer();
-          this.applyPrettify(this.state.langCode !== "txt");
+          this.applyPrettify(!this.state.noCode);
         }
         this.isClicked = false;
       }
@@ -198,10 +203,7 @@ export class Quiz extends React.Component<IProps, IState> {
         // Apply specific quiz to current index.
         const quiz: ICode = results[0];
         let unOrderedList = [...this.state.unOrderedList];
-        unOrderedList[this.state.index] = {
-          ...unOrderedList[this.state.index],
-          ...quiz,
-        };
+        unOrderedList[this.state.index] = quiz;
         this.setState({ unOrderedList }, () => {
           this.getQuiz(true);
         });
