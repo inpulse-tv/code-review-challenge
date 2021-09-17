@@ -12,7 +12,7 @@ import { IValues as RegistrationValues } from "./features/forms/IValues";
 import { ILeaderboard } from "./datas/ILeaderboard";
 import LeaderboardService from "./features/leaderboard/Leaderboard.Service";
 import useStateCallback from "./hooks/StateCallback";
-import Display from "./features/Display";
+import { Display } from "./features/Display";
 import Debug from "./features/debug/Debug";
 
 function App() {
@@ -41,10 +41,18 @@ function App() {
   };
 
   /**
+   * Manage screen display status.
+   * @param display
+   */
+  const handleDisplayChange = (display: Display) => {
+    setDisplayScreen(display);
+  }
+
+  /**
    * Handle click event on leaderboard.
    */
   const handleLeaderboardClick = () => {
-    setDisplayScreen(Display.Registration);
+    handleDisplayChange(Display.Registration);
   };
 
   /**
@@ -52,14 +60,14 @@ function App() {
    */
   const handleRegistrationSubmit = (values: RegistrationValues) => {
     setUserData(Object.assign({}, userData, values));
-    setDisplayScreen(Display.Countdown);
+    handleDisplayChange(Display.Countdown);
   };
 
   /**
    * handle escape key press event from registration formular.
    */
   const handleEscapeKeyPress = () => {
-    setDisplayScreen(Display.Leaderboard);
+    handleDisplayChange(Display.Leaderboard);
   };
 
   /**
@@ -68,7 +76,7 @@ function App() {
    */
   const handleCountdownTimeChange = (time: number) => {
     if (time < 0) {
-      setDisplayScreen(Display.Quiz);
+      handleDisplayChange(Display.Quiz);
     }
   };
 
@@ -112,7 +120,7 @@ function App() {
       );
 
       // Show result.
-      setDisplayScreen(Display.Result);
+      handleDisplayChange(Display.Result);
     }
   };
 
@@ -149,7 +157,7 @@ function App() {
     // Reset score and data.
     setPoints(0);
     setUserData(lbService.userInit);
-    setDisplayScreen(Display.Leaderboard);
+    handleDisplayChange(Display.Leaderboard);
   };
 
   /**
@@ -177,6 +185,7 @@ function App() {
           quizData={quizData}
           display={displayScreen}
           quizRef={quizRef}
+          onDisplayChange={handleDisplayChange}
         />
       )}
       {displayScreen === Display.Leaderboard && (

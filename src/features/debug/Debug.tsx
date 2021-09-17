@@ -1,5 +1,5 @@
 import react, { useRef } from "react";
-import Display from "../Display";
+import { Display } from "../Display";
 import { IProps } from "./IProps";
 
 /**
@@ -38,11 +38,32 @@ const Debug = (props: IProps) => {
       props.quizRef.current.showAnswer(ev.currentTarget.checked);
   };
 
+  const handleDisplayChange = (
+    ev: react.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    const value: number = parseInt(ev.currentTarget.value);
+    props.onDisplayChange(value);
+  };
+
   return (
     <div className="debug">
       <dl>
         <dt>Number of quiz</dt>
         <dd>{props.quizData.length}</dd>
+      </dl>
+      <dl>
+        <dt>Display</dt>
+        <dd>
+          <select onChange={(ev) => handleDisplayChange(ev)}>
+            {Object.keys(Display)
+              .filter((keys: any) => isNaN(keys))
+              .map((keys: any) => (
+                <option key={keys} value={Display[keys]}>
+                  {keys}
+                </option>
+              ))}
+          </select>
+        </dd>
       </dl>
       <dl>
         <dt>Select quiz Id</dt>
@@ -57,7 +78,8 @@ const Debug = (props: IProps) => {
         <dt>Show answer</dt>
         <dd>
           <input
-            type="checkbox" ref={checkboxRef}
+            type="checkbox"
+            ref={checkboxRef}
             onChange={(ev) => handleShowAnswerChange(ev)}></input>
         </dd>
       </dl>

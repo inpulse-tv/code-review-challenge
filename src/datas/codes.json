@@ -212,7 +212,7 @@
   },
   {
     "id": 22,
-    "statement": "Comment convertir a := 3 en Go ?",
+    "statement": "De quelle manière doit-on convertir en décimal une variable a ?",
     "code": "- float64(a)\n- var a float64 = float64(a)\n- var b float64 = float64(a)",
     "language": "go",
     "range": {
@@ -232,7 +232,7 @@
   },
   {
     "id": 24,
-    "statement": "En Go, sur quels types de données pouvez-vous utiliser \"for -range\" ?",
+    "statement": "Sur quels types de données pouvez-vous utiliser \"for -range\" ?",
     "code": "- array, slice, map\n- slice, map, array, string, channel\n- slice, string, map, channel\n- slice, map, string",
     "language": "go",
     "nocode": true,
@@ -486,16 +486,6 @@
   },
   {
     "id": 49,
-    "statement": "Quelle réponse n'est pas valable pour remplacer X dans le code ci-dessous :",
-    "code": "X fruits = new List();\nfruits.add(\"Apple\");\n\n- var\n- let\n- List<String>",
-    "language": "cs",
-    "range": {
-      "start": 51,
-      "length": 5
-    }
-  },
-  {
-    "id": 50,
     "statement": "Qu'est-ce qu'une IIFE ?",
     "code": "- Une fonction asynchrone.\n- Une fonction exécutée dès qu'elle est définie.\n- Une fonction non protégée des variables globales.",
     "language": "js",
@@ -503,6 +493,57 @@
     "range": {
       "start": 27,
       "length": 48
+    }
+  },
+  {
+    "id": 50,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "static void Main(string[] args)\n{\n  Console.Clear();\n  DateTime date = DateTime.Now;\n  Console.WriteLn(\"\\nToday is {0:d} at {0:T}.\", date);\n}",
+    "language": "cs",
+    "range": {
+      "start": 95,
+      "length": 7
+    }
+  },
+  {
+    "id": 51,
+    "statement": "De quelle manière écrit-t-on un héritage de classe ?",
+    "code": "- class A implements B\n- class A : B\n- class A extends B\n- class A inherits B",
+    "language": "java",
+    "range": {
+      "start": 37,
+      "length": 19
+    }
+  },
+  {
+    "id": 52,
+    "statement": "De quelle manière écrit-t-on un héritage de classe ?",
+    "code": "- class A implements B\n- class A : B\n- class A extends B\n- class A inherits B",
+    "language": "cs",
+    "range": {
+      "start": 23,
+      "length": 13
+    }
+  },
+  {
+    "id": 53,
+    "statement": "Dans une sous-classe, une méthode redéfinie doit être déclarée ...",
+    "code": "- sealed\n- virtual\n- override\n- internal",
+    "language": "cs",
+    "range": {
+      "start": 19,
+      "length": 10
+    }
+  },
+  {
+    "id": 54,
+    "statement": "Dans une classe, une propriété static ...",
+    "code": "- Ne peut être hérité.\n- Est constant.\n- Possède la même valeur pour toutes les instances de la classe.\n- Ne peut être accédé depuis une autre classe.",
+    "language": "cs",
+    "nocode": true,
+    "range": {
+      "start": 39,
+      "length": 64
     }
   }
 ]
