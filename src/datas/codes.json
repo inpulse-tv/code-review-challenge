@@ -2,10 +2,10 @@
   {
     "id": 1,
     "statement": "Trouvez la faute de syntaxe",
-    "code": "ethereum = pd.read_csv('ETH-EUR.csv', index_col = Date, parse_dates = True) \nethereum.head()\nethereum.index \nbtc_eth = pd.merge(bitcoin,ethereum , on='Date', how='inner', suffixes=('_btc','_eth'))\nbtc_eth[['Close_btc','Close_eth']].plot(subplots=True , figsize=(12,8))",
-    "language": "py",
+    "code": "SELECT u.desk, SUM(t.AmountEur) as SumAmountEur, COUNT(1) as nbTrades\nFROM Users u\nINNER JOIN Trades t in t.Trader = u.Login\nWHERE t.Counterparty = ‘SG’\nGROUP BY u.Desk\nORDER BY u.Desk",
+    "language": "sql",
     "range": {
-      "start": 50,
+      "start": 102,
       "length": 4
     }
   },
@@ -564,6 +564,223 @@
     "range": {
       "start": 33,
       "length": 32
+    }
+  },
+  {
+    "id": 57,
+    "statement": "Quelle est la bonne façon de créer un objet appelé myObj de MyClass ?",
+    "code": "- new myObj = MyClass();\n- MyClass myObj = new MyClass();\n- class myObj = new MyClass();\n- class MyClass = new myObj();",
+    "language": "java",
+    "range": {
+      "start": 25,
+      "length": 32
+    }
+  },
+  {
+    "id": 58,
+    "statement": "Quelle méthode peut être utilisée pour trouver la valeur la plus élevée de x et y ?",
+    "code": "- Math.maxNum(x,y)\n- Math.maximum(x,y)\n- Math.max(x,y)\n- Math.largest(x,y)",
+    "language": "java",
+    "range": {
+      "start": 39,
+      "length": 15
+    }
+  },
+  {
+    "id": 59,
+    "statement": "Dans Git, quelle est la commande pour ajouter le référentiel distant \"https://inpulse.tv/repo/project.git\" comme \"origin\" ?",
+    "code": "- git origin=https://inpulse.tv/repo/project.git\n- git remote add origin https://inpulse.tv/repo/project.git \n- git add origin https://inpulse.tv/repo/project.git\n- git remote https://inpulse.tv/repo/project.git",
+    "language": "bash",
+    "range": {
+      "start": 49,
+      "length": 59
+    }
+  },
+  {
+    "id": 60,
+    "statement": "Git Pull est une combinaison de :",
+    "code": "- branch et checkout\n- add et commit \n- fetch et merge",
+    "language": "bash",
+    "range": {
+      "start": 38,
+      "length": 16
+    }
+  },
+  {
+    "id": 61,
+    "statement": "Laquelle de ces affirmations est fausse pour le décorateur \"@Injectable\" d'Angular ?",
+    "code": "- Permet la génération des métadonnées nécessaires pour créer les dépendances de la classe lors de l'injection.\n- Génère autant d'instance que nécessaire quand il est fournie et injectée comme dépendance dans un composant.\n- Lorsqu'on fournis le service au niveau racine, Angular crée une seule instance partagée du service.",
+    "language": "js",
+    "nocode": true,
+    "range": {
+      "start": 112,
+      "length": 110
+    }
+  },
+  {
+    "id": 62,
+    "statement": "A quoi sert la directive \"<router-outlet>\" sous Angular ?",
+    "code": "- Agit comme un lien de redirection lors d'un click de l'utilisateur.\n- Agit comme un espace réservé qu'Angular remplit dynamiquement en fonction de l'état actuel du routeur.\n- Agit comme un service de routeur en fournissant le chemin et les paramètres de la route.",
+    "language": "js",
+    "nocode": true,
+    "range": {
+      "start": 70,
+      "length": 104
+    }
+  },
+  {
+    "id": 63,
+    "statement": "Soit le Hook React suivant, indiquez la faute de syntaxe.",
+    "code": "import React from \"react\";\n\nexport default function DeviceDetect() {\n  React.useEffect(() => {\n    console.log(`user's device is: ${window.navigator.userAgent}`);    \n  }, []);\n}",
+    "language": "js",
+    "range": {
+      "start": 48,
+      "length": 9
+    }
+  },
+  {
+    "id": 64,
+    "statement": "Laquelle de ces méthodes n'est pas une méthode ReactDOM ?",
+    "code": "- hydrate()\n- createPortal()\n- createElement()\n- findDOMNode()",
+    "language": "js",
+    "range": {
+      "start": 29,
+      "length": 17
+    }
+  },
+  {
+    "id": 65,
+    "statement": "Sous React, quelle va être le rendu HTML du code suivant ?",
+    "code": "const element = React.createElement(\n  'h1',\n  {className: 'greeting'},\n  'Hello, world!'\n);\n\n- <h1 class=\"greeting\" value=\"Hello, world!\" />\n- <h1 class=\"greeting\">Hello, world!</h1>\n- <h1 className=\"greeting\" value=\"Hello, world!\" />\n- <h1 className=\"greeting\">Hello, world!</h1>",
+    "language": "js",
+    "range": {
+      "start": 147,
+      "length": 54
+    }
+  },
+  {
+    "id": 66,
+    "statement": "A quoi sert la méthode \"bind\" dans le code suivant ?",
+    "code": "this.handleClick = this.handleClick.bind(this);\n\n- Exécute la méthode handleClick et renvoi la valeur dans le contexte.\n- Créé une nouvelle instance de handleClick dans \"this\".\n- Permet de lier le contexte de l’objet référencé par \"this\" à la méthode handleClick.",
+    "language": "js",
+    "range": {
+      "start": 177,
+      "length": 86
+    }
+  },
+  {
+    "id": 67,
+    "statement": "Pour la configuration de sécurité Spring suivante, une seule affirmation est vraie :",
+    "code": "public void configure(HttpSecurity http) {\n  http.authorizeRequests()\n      .antMatchers(\"/users/**\").hasRole(\"ADMIN\")\n      .anyRequest().authenticated()\n}\n\n- Un admin peut accéder au chemin \"user\" et ses enfants.\n- Toute connexion requière une authentification.\n- Vous n’avez pas accès si vous n’avez pas un rôle admin.",
+    "language": "java",
+    "range": {
+      "start": 215,
+      "length": 48
+    }
+  },
+  {
+    "id": 68,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "import { Observable } from 'rxjs';\n\nconst data = new Observable(obs => {\n    obs.next(1000);\n    obs.complete();\n});\n\ndata.read({\n    next: value => console.log(value),\n    error: err => console.error(err),\n    complete: () => console.log('DONE!')\n});",
+    "language": "js",
+    "range": {
+      "start": 125,
+      "length": 6
+    }
+  },
+  {
+    "id": 69,
+    "statement": "Parmi les affirmations suivantes, une seule est vraie :",
+    "code": "- Un Observable produit une seule valeur.\n- Un Observable est annulable.\n- Un Observable possède deux méthodes uniquement.\n- Un Observable est traité immédiatement.",
+    "language": "js",
+    "nocode": true,
+    "range": {
+      "start": 42,
+      "length": 30
+    }
+  },
+  {
+    "id": 70,
+    "statement": "Parmi les affirmations suivantes, une seule est fausse :",
+    "code": "- Une Promesse produit une seule valeur.\n- Une Promesse est non annulable.\n- Une Promesse possède une centaine d'opérateurs de transformation natifs.\n- Une Promesse est traitée immédiatement.",
+    "language": "js",
+    "nocode": true,
+    "range": {
+      "start": 75,
+      "length": 74
+    }
+  },
+  {
+    "id": 71,
+    "statement": "Parmi les affirmations suivantes, une seule est fausse :",
+    "code": "- Une Task représente une opération asynchrone.\n- La classe Task peut renvoyer un résultat.\n- Une Task peut avoir plusieurs processus se déroulant en même temps.\n- La Task ne prends pas en charge l'annulation.",
+    "language": "cs",
+    "nocode": true,
+    "range": {
+      "start": 162,
+      "length": 47
+    }
+  },
+  {
+    "id": 72,
+    "statement": "Parmi les affirmations suivantes, une seule est fausse :",
+    "code": "- La classe Thread est utilisée pour créer et manipuler un Thread.\n- La classe Thread peut renvoyer un résultat.\n- Un Thread ne peut avoir qu'une tâche à la fois.\n- La classe Thread ne prends pas en charge l'annulation.",
+    "language": "cs",
+    "nocode": true,
+    "range": {
+      "start": 67,
+      "length": 45
+    }
+  },
+  {
+    "id": 73,
+    "statement": "Parmi les affirmations suivantes, une seule est fausse :",
+    "code": "- La classe Thread est utilisée pour créer et manipuler un Thread.\n- La classe Thread peut renvoyer un résultat.\n- Un Thread ne peut avoir qu'une tâche à la fois.\n- La classe Thread ne prends pas en charge l'annulation.",
+    "language": "cs",
+    "nocode": true,
+    "range": {
+      "start": 67,
+      "length": 45
+    }
+  },
+  {
+    "id": 74,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "public class MyThread {\n  public static void main(String[] args){\n    Thread thread = new Thread(new Job());\n    thread.run();\n  }\n}",
+    "language": "java",
+    "range": {
+      "start": 119,
+      "length": 5
+    }
+  },
+  {
+    "id": 75,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "public class Job extends Runnable {\n  @Override\n  public void run(){\n    System.out.println(\"My job\");\n  }\n}",
+    "language": "java",
+    "range": {
+      "start": 17,
+      "length": 7
+    }
+  },
+  {
+    "id": 76,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "public static void Main(string[] args) {  \n  Task<string> obTask = Task.start(() => (return “Hello”));  \n  Console.WriteLine(obTask.result);  \n}",
+    "language": "cs",
+    "range": {
+      "start": 78,
+      "length": 5
+    }
+  },
+  {
+    "id": 77,
+    "statement": "Quel sera le rendu du composant React ci-dessous ?",
+    "code": "render() {\n  const count = 0;\n  return (\n    <div>\n      { count && <h1>Messages: {count}</h1>}\n    </div>\n  );\n}\n\n- null\n- <div></div>\n- <div>0</div>\n- <div><h1>Messages: 0</h1></div>",
+    "language": "js",
+    "range": {
+      "start": 180,
+      "length": 27
     }
   }
 ]
