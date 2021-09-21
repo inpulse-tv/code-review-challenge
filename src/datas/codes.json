@@ -782,5 +782,107 @@
       "start": 180,
       "length": 27
     }
+  },
+  {
+    "id": 78,
+    "statement": "Que signifie l’acronyme \"ACID\" que l’on associe aux transactions ?",
+    "code": "- Actif, Combatif, Intrépide, Déterminé\n- Alban Cadran et Isabelle Dupard, les inventeurs de la notion de transaction\n- Atomicity, Consitency, Isolation, Durability",
+    "language": "sql",
+    "nocode": true,
+    "range": {
+      "start": 118,
+      "length": 46
+    }
+  },
+  {
+    "id": 79,
+    "statement": "Que signifie \"SGBDR\" ?",
+    "code": "- Système de gestion de base de données relationnelle\n- Système de gestion de base de données relatives\n- Système de gestion de base de données réactives",
+    "language": "sql",
+    "nocode": true,
+    "range": {
+      "start": 0,
+      "length": 53
+    }
+  },
+  {
+    "id": 80,
+    "statement": "Pour afficher tous les enregistrements de la table \"Clients\" dont les valeurs de la colonne \"Noms\" commencent par un \"j\", quelle requête faut-il écrire ?",
+    "code": "- SELECT Noms FROM Clients WHERE Noms = \"j%\"\n- SELECT * FROM Clients AND Noms LIKE \"%j\"\n- SELECT * FROM Clients WHERE Noms LIKE \"j%\"",
+    "language": "sql",
+    "range": {
+      "start": 88,
+      "length": 46
+    }
+  },
+  {
+    "id": 81,
+    "statement": "Comment peut-on insérer un nouvel enregistrement dans la table \"Commandes\" ?",
+    "code": "- INSERT INTO Commandes VALUES (127821, Ipad, 3)\n- INSERT Commandes(Id, Nom_article, quantité) VALUES (127821, Ipad, 3)\n- Les deux requêtes sont possibles",
+    "language": "sql",
+    "range": {
+      "start": 0,
+      "length": 48
+    }
+  },
+  {
+    "id": 82,
+    "statement": "Comment peut-on modifier \"Bezos\" par \"Pesos\" dans la colonne \"Noms\" de la table \"Clients\" ?",
+    "code": "- UPDATE Clients SET Noms = \"Bezos\" WHERE Noms = \"Pesos\"\n- UPDATE Clients SET Noms = \"Pesos\" INTO Noms = \"Bezos\"\n- UPDATE Clients SET Noms = \"Pesos\" WHERE Noms = \"Bezos\"",
+    "language": "sql",
+    "range": {
+      "start": 113,
+      "length": 60
+    }
+  },
+  {
+    "id": 83,
+    "statement": "Quel opérateur est utilisé pour sélectionner des valeurs dans un intervalle ?",
+    "code": "- WITHIN\n- BETWEEN\n- RANGE",
+    "language": "sql",
+    "range": {
+      "start": 9,
+      "length": 10
+    }
+  },
+  {
+    "id": 84,
+    "statement": "Quelle instruction SQL est utilisée pour renvoyer uniquement des valeurs différentes ?",
+    "code": "- SELECT UNIQUE\n- SELECT DISTINCT\n- SELECT DIFFERENT",
+    "language": "sql",
+    "range": {
+      "start": 16,
+      "length": 17
+    }
+  },
+  {
+    "id": 85,
+    "statement": "Quel mot-clé SQL est utilisé pour trier le résultat ?",
+    "code": "- ORDER\n- ORDER BY\n- SORT\n- SORT BY",
+    "language": "sql",
+    "range": {
+      "start": 8,
+      "length": 10
+    }
+  },
+  {
+    "id": 86,
+    "statement": "Comment peut-on supprimer l'enregistrement dont la valeur dans la colonne Noms dans la table \"Clients\" est \"Pesos\"?",
+    "code": "- DELETE FROM Clients WHERE Noms = \"Pesos\"\n- DELETE Noms = \"Pesos\" FROM Clients\n- DELETE FROM Clients WHERE ROW = \"Pesos\"",
+    "language": "sql",
+    "range": {
+      "start": 0,
+      "length": 43
+    }
+  },
+  {
+    "id": 87,
+    "statement": "Quelle commande SQL n'est pas une contrainte ?",
+    "code": "- CHECK\n- NOT NULL\n- DEFAULT\n- DISTINCT",
+    "language": "sql",
+    "range": {
+      "start": 29,
+      "length": 10
+    }
   }
 ]
