@@ -63,7 +63,7 @@ function App() {
    * Handle registration submit event.
    */
   const handleRegistrationSubmit = (values: RegistrationValues) => {
-    if (values.email === "") values.email = null;
+    values.name = values.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     setUserData(Object.assign({}, userData, values));
     handleDisplayChange(Display.Countdown);
   };

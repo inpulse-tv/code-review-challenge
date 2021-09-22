@@ -1,5 +1,5 @@
 export interface IValues {
   name: string;
-  email: string | null;
+  email: string;
   cgu: boolean;
 }
