@@ -50,7 +50,7 @@ const Debug = (props: IProps) => {
   };
 
   return (
-    <div className="debug">
+    <div className="debug" onClick={(ev) => ev.stopPropagation()}>
       <dl>
         <dt>Number of quiz</dt>
         <dd>{props.quizData.length}</dd>

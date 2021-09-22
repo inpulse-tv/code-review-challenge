@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { StartCountdown } from "./features/countdown/StartCountdown";
 import { Quiz } from "./features/quiz/Quiz";
 import Countdown, { zeroPad, CountdownRenderProps } from "react-countdown";
@@ -46,19 +46,24 @@ function App() {
    */
   const handleDisplayChange = (display: Display) => {
     setDisplayScreen(display);
-  }
+  };
 
   /**
    * Handle click event on leaderboard.
    */
-  const handleLeaderboardClick = () => {
+  const handleLeaderboardClick = useCallback(() => {
+   // Reset score and data.
+    setPoints(0);
+    setUserData(lbService.userInit);
+
     handleDisplayChange(Display.Registration);
-  };
+  }, [lbService.userInit, setUserData]);
 
   /**
    * Handle registration submit event.
    */
   const handleRegistrationSubmit = (values: RegistrationValues) => {
+    if (values.email === "") values.email = null;
     setUserData(Object.assign({}, userData, values));
     handleDisplayChange(Display.Countdown);
   };
@@ -153,12 +158,9 @@ function App() {
   /**
    * Handle click on user result display.
    */
-  const handleEndClick = (): void => {
-    // Reset score and data.
-    setPoints(0);
-    setUserData(lbService.userInit);
+  const handleResultClick = useCallback(() => {
     handleDisplayChange(Display.Leaderboard);
-  };
+  }, []);
 
   /**
    * Display a tile element.
@@ -178,6 +180,19 @@ function App() {
     DebugToolBar = () => null;
   }
 
+  useEffect(() => {
+    if (displayScreen === Display.Leaderboard)
+      document.body.addEventListener("click", handleLeaderboardClick, false);
+
+    if (displayScreen === Display.Result)
+      document.body.addEventListener("click", handleResultClick, false);
+
+    return () => {
+      document.body.removeEventListener("click", handleLeaderboardClick, false);
+      document.body.removeEventListener("click", handleResultClick, false);
+    };
+  }, [displayScreen, handleLeaderboardClick, handleResultClick]);
+
   return (
     <div className="App">
       {showDebug && (
@@ -189,7 +204,7 @@ function App() {
         />
       )}
       {displayScreen === Display.Leaderboard && (
-        <div onClick={handleLeaderboardClick} className="leaderboard">
+        <div className="leaderboard">
           <Title />
           <Leaderboard
             className="leaderboard-table"
@@ -220,7 +235,7 @@ function App() {
       {displayScreen === Display.Quiz && (
         <div>
           <div className="quiz-toolbar">
-            {language && (`${language} / `)}
+            {language && `${language} / `}
             <Countdown
               date={Date.now() + 59000}
               renderer={countdownRenderer}
@@ -230,7 +245,7 @@ function App() {
             />
           </div>
           <Quiz
-            datas={quizData}
+            data={quizData}
             onIndexChange={handleIndexChange}
             maxIndex={maxIndex}
             startIndex={0}
@@ -240,7 +255,7 @@ function App() {
         </div>
       )}
       {displayScreen === Display.Result && (
-        <div className="results" onClick={handleEndClick}>
+        <div className="results">
           <h1>Votre score</h1>
           <p>
             <b>{points}</b> bonne{points === 1 ? null : "s"} reponse

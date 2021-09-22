@@ -37,10 +37,10 @@ const RegisterFormular = (props: IProps) => {
   );
 
   useEffect(() => {
-    document.addEventListener("keydown", (e) => onKeyDown(e), false);
+    document.addEventListener("keydown", onKeyDown, false);
 
     return () => {
-      document.removeEventListener("keydown", (e) => onKeyDown(e), false);
+      document.removeEventListener("keydown", onKeyDown, false);
     };
   }, [onKeyDown]);
 
@@ -86,10 +86,7 @@ const RegisterFormular = (props: IProps) => {
               />
               <div className={styles.cut}></div>
               <label htmlFor="name" className={styles.placeholder}>
-                Nom{" "}
-                {errors.name && touched.name
-                  ? `... ${errors.name}`
-                  : null}
+                Nom {errors.name && touched.name ? `... ${errors.name}` : null}
               </label>
             </div>
             <div className={styles["input-container"]}>
@@ -115,7 +112,7 @@ const RegisterFormular = (props: IProps) => {
                 </span>
                 <span>
                   En cliquant sur "Démarrer le jeu" vous autorisez Ingeniance et
-                  inpulse.tv à utiliser votre image sur leur chaîne youtube.
+                  inpulse.tv à diffuser votre participation sur youtube.
                 </span>
               </label>
               <ErrorMessage

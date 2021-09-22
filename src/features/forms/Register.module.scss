@@ -60,7 +60,7 @@ h2 {
   height: 40px;
   left: 20px;
   position: absolute;
-  top: -14px;
+  top: -20px;
   transition: transform 200ms;
   width: 90%;
 }
@@ -80,7 +80,7 @@ h2 {
   transition: transform 200ms, color 200ms;
   position: absolute;
   left: 16px;
-  top: 26px;
+  top: 20px;
 }
 
 .input:focus ~ .placeholder,

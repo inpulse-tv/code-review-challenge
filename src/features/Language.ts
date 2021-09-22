@@ -10,6 +10,7 @@ export const getLanguage = (value: string): string => {
     java: "Java",
     cs: "C#",
     bash: "Bash",
+    vba: "VBA"
   };
 
   return languages[value];

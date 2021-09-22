@@ -28,7 +28,7 @@ export default class LeaderboardService {
       (item) =>
         item.name?.toString().toUpperCase() ===
           user.name?.toString().toUpperCase() &&
-        item.email?.toLowerCase() === user.email?.toLocaleLowerCase()
+        item.email?.toLowerCase() === user.email?.toLowerCase()
     );
     if (index > -1) {
       const currentData = this.leaderboardData[index];

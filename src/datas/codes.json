@@ -212,7 +212,7 @@
   },
   {
     "id": 22,
-    "statement": "De quelle manière doit-on convertir en décimal une variable a ?",
+    "statement": "De quelle manière doit-on convertir en nombre à virgule flottante une variable a ?",
     "code": "- float64(a)\n- var a float64 = float64(a)\n- var b float64 = float64(a)",
     "language": "go",
     "range": {
@@ -609,12 +609,12 @@
   {
     "id": 61,
     "statement": "Laquelle de ces affirmations est fausse pour le décorateur \"@Injectable\" d'Angular ?",
-    "code": "- Permet la génération des métadonnées nécessaires pour créer les dépendances de la classe lors de l'injection.\n- Génère autant d'instance que nécessaire quand il est fournie et injectée comme dépendance dans un composant.\n- Lorsqu'on fournis le service au niveau racine, Angular crée une seule instance partagée du service.",
+    "code": "- Permet la génération des métadonnées nécessaires pour créer les dépendances de la classe lors de l'injection.\n- Génère autant d'instance que nécessaire quand il est fournis et injecté comme dépendance dans un composant.\n- Lorsqu'on fournis le service au niveau racine, Angular crée une seule instance partagée du service.",
     "language": "js",
     "nocode": true,
     "range": {
       "start": 112,
-      "length": 110
+      "length": 109
     }
   },
   {
@@ -883,6 +883,146 @@
     "range": {
       "start": 29,
       "length": 10
+    }
+  },
+  {
+    "id": 88,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "Public Sub Main()\n  Dim myName, myLastName As String\n  myName = \"Philippe\"\n  myLastName = \"Poutou\"\n  SayHello(myName, myLastName)\nEnd Sub\n\nPublic Sub SayHello(ByVal firstName As String, ByVal lastName As String)\n  MsgBox (\"Hello \" + firstName + \" \" + lastName)\nEnd Sub",
+    "language": "vba",
+    "range": {
+      "start": 101,
+      "length": 8
+    }
+  },
+  {
+    "id": 89,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "Public Sub Main()\n  Dim myName, salut As String\n  myName = \"Philippe\"\n  salut = getSalutation(myName, myLastName)\n  MsgBox (salut)\nEnd Sub\n\nPublic Sub getSalutation(ByVal name As String) As String\n getSalutation = \"Hello \" + name\nEnd Sub",
+    "language": "vba",
+    "range": {
+      "start": 146,
+      "length": 5
+    }
+  },
+  {
+    "id": 90,
+    "statement": "Trouvez la faute de syntaxe",
+    "code": "Public Sub Main()\n  Dim myBirthDate As Date\n  myBirthDate = DateSerial(1967, 3, 14)\n  myAge = getAge(myBirthDate)\n  MsgBox (myAge)\nEnd Sub\n\nPublic Function getAge(ByVal birthDate As Date) As Integer\n  Dim age As Integer\n  age = Int((Date - birthDate) / 365)\n  return age\nEnd Function",
+    "language": "vba",
+    "range": {
+      "start": 260,
+      "length": 6
+    }
+  },
+  {
+    "id": 91,
+    "statement": "Quel nom de variable n’est pas autorisé ?",
+    "code": "- Var_\n- Var-iable\n- VarIabLe\n- Var_iable",
+    "language": "py",
+    "range": {
+      "start": 7,
+      "length": 11
+    }
+  },
+  {
+    "id": 92,
+    "statement": "Quelle est la bonne syntaxe pour retourner le premier caractère d’un string ?",
+    "code": "- x= \"Hello\"[0]\n- x= \"Hello\".sub(0,1)\n- x=sub(\"Hello\", 0)",
+    "language": "py",
+    "range": {
+      "start": 0,
+      "length": 16
+    }
+  },
+  {
+    "id": 93,
+    "statement": "Quel est l'output du code suivant :",
+    "code": "string='woooow inpulse.tv is the new tech media ooo !!'\nprint(string.strip(\" wo!\"))\n\n- ooow inpulse.tv is the new tech media oo !\n- inpulse.tv is the new tech media\n- woooo inpulse.tv is the new tech media !",
+    "language": "py",
+    "range": {
+      "start": 130,
+      "length": 34
+    }
+  },
+  {
+    "id": 94,
+    "statement": "Quelle structure de données est ordonnées, modifiable et autorise les doublons ?",
+    "code": "- Liste\n- Tuple\n- Dictionnaire\n- Ensemble",
+    "language": "py",
+    "range": {
+      "start": 0,
+      "length": 7
+    }
+  },
+  {
+    "id": 95,
+    "statement": "Quelle est la bonne syntaxe pour afficher le type d’une variable ou d’un objet ?",
+    "code": "- print(typeof(x))\n- print(type(x))\n- print(typeOf(x))\n- print(typeof(x)",
+    "language": "py",
+    "range": {
+      "start": 19,
+      "length": 16
+    }
+  },
+  {
+    "id": 96,
+    "statement": "Quelle est la bonne syntaxe pour lire et afficher la première ligne du fichier inpulse.md ?",
+    "code": "- print(f.readline('inpulse.md'))\n- open('inpulse.md', 'r')\n  print(readline())\n- f = open('inpulse.md', 'r')\n  print(f.readline())",
+    "language": "py",
+    "range": {
+      "start": 80,
+      "length": 52
+    }
+  },
+  {
+    "id": 97,
+    "statement": "Quelle est la sortie du code suivant :",
+    "code": "def swapList(list):\n  debut, *milieu, fin = list\n  list = [fin, *milieu, debut]\n  return list\n\nnewList = [12, 35, 9, 56, 24]\nprint(swapList(newList))\n\n- [12, 9, 56, 24, 35]\n- [24, 35, 9, 56, 12]\n- [24, 56, 9, 35, 12]",
+    "language": "py",
+    "range": {
+      "start": 173,
+      "length": 21
+    }
+  },
+  {
+    "id": 98,
+    "statement": "Quelle commande est utilisée pour arrêter une boucle ?",
+    "code": "- stop\n- exit \n- break\n- Les trois",
+    "language": "py",
+    "range": {
+      "start": 15,
+      "length": 7
+    }
+  },
+  {
+    "id": 99,
+    "statement": "Quelle méthode est utilisée pour remplacer des parties d'une chaîne de caractères ?",
+    "code": "- replace()\n- repl()\n- replaceString()\n- switch()",
+    "language": "py",
+    "range": {
+      "start": 0,
+      "length": 11
+    }
+  },
+  {
+    "id": 100,
+    "statement": "Trouvez l’erreur de syntaxe :",
+    "code": "def isPalindrome(s):\n  return s == s[-1::]\n\ns = \"malayalam\"\nans = isPalindrome(s)\nif ans:\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+    "language": "py",
+    "range": {
+      "start": 36,
+      "length": 6
+    }
+  },
+  {
+    "id": 101,
+    "statement": "Quelle est la sortie du code suivant :",
+    "code": "const nombres = [2,3,4,4,2,2,2,4,4,5,5,6,6,7,5,32,3,4,5];\nconsole.log([...new Set(nombres)]);\n\n- [2,3,4,5,6,7,32]\n- [2,3,4,2,4,5,6,7,5,32,3,4,5]\n- [2,2,2,2,3,3,4,4,4,4,4,5,5,5,5,6,6,7,32]\n- undefined",
+    "language": "js",
+    "range": {
+      "start": 95,
+      "length": 18
     }
   }
 ]

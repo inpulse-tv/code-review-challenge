@@ -89,7 +89,7 @@ export class Quiz extends React.Component<IProps, IState> {
    * @returns an unordered list of codes.
    */
   getUnOrderedCodes(): ICode[] {
-    let list: ICode[] = this.props.datas.map((code) => code);
+    let list: ICode[] = this.props.data.map((code) => code);
 
     // Unorder codes list
     for (var i = 0; i < list.length - 1; i++) {
@@ -196,7 +196,7 @@ export class Quiz extends React.Component<IProps, IState> {
    */
   displayQuiz(id: number): void {
     if (process.env.NODE_ENV !== "production") {
-      const results: ICode[] = this.props.datas.filter(
+      const results: ICode[] = this.props.data.filter(
         (code) => code.id === id
       );
       if (results.length > 0) {
